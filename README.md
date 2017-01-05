@@ -23,10 +23,9 @@ Use flag `--registry=mdns`
 - [sidecar](sidecar) - Greeter service using the sidecar with multiple languages
 - [booking](booking) - A booking.com demo application
 - [plugins](plugins) - How to use plugins
-- [template](template) - Api, web and srv service templates generated with `micro new`
-
-- [client](client) - Usage of the Client package to call a service.
+- [template](template) - Api, web and srv service templates generated with the 'micro new' command
 - [broker](broker) - A example of using Broker for Publish and Subscribing.
+- [client](client) - Usage of the Client package to call a service.
 - [server](server) - Use of the Server package directly to server requests.
 - [service](service) - Example of the top level Service in go-micro.
 
