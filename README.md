@@ -1,4 +1,4 @@
-# Micro Examples
+# Micro Examples  [![Travis CI](https://travis-ci.org/micro/examples.svg?branch=master)](https://travis-ci.org/micro/examples)
 
 This is a repository for micro examples. Feel free to contribute.
 
