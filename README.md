@@ -28,6 +28,7 @@ Use flag `--registry=mdns`
 - [client](client) - Usage of the Client package to call a service.
 - [server](server) - Use of the Server package directly to server requests.
 - [service](service) - Example of the top level Service in go-micro.
+- [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 
 ## External
 
