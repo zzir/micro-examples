@@ -8,8 +8,13 @@ All services require service discovery. The default is Consul or MDNS.
 
 ### Consul 
 
+Install
 ```
 brew install consul
+```
+
+Run
+```
 consul agent -dev
 ```
 
