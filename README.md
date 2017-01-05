@@ -25,6 +25,11 @@ Use flag `--registry=mdns`
 - [plugins](plugins) - How to use plugins
 - [template](template) - Api, web and srv service templates generated with `micro new`
 
+- [client](client) - Usage of the Client package to call a service.
+- [broker](broker) - A example of using Broker for Publish and Subscribing.
+- [server](server) - Use of the Server package directly to server requests.
+- [service](service) - Example of the top level Service in go-micro.
+
 ## External
 
 - [auth-srv](https://github.com/micro/auth-srv) - An Oauth2 authentication service
