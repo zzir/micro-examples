@@ -33,6 +33,7 @@ Use flag `--registry=mdns`
 - [redirect](redirect) - An example of how to http redirect using an API service
 - [server](server) - Use of the Server package directly to server requests.
 - [service](service) - Example of the top level Service in go-micro.
+- [shutdown](shutdown) - Demonstrates graceful shutdown via context cancellation
 - [template](template) - Api, web and srv service templates generated with the 'micro new' command
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 
