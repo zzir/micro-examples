@@ -30,6 +30,7 @@ Use flag `--registry=mdns`
 - [plugins](plugins) - How to use plugins
 - [broker](broker) - A example of using Broker for Publish and Subscribing.
 - [client](client) - Usage of the Client package to call a service.
+- [graceful](graceful) - Demonstrates graceful shutdown of a service
 - [redirect](redirect) - An example of how to http redirect using an API service
 - [server](server) - Use of the Server package directly to server requests.
 - [service](service) - Example of the top level Service in go-micro.
