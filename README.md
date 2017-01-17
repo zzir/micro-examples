@@ -4,9 +4,12 @@ This is a repository for micro examples. Feel free to contribute.
 
 ## Deps
 
+
+### Discovery
+
 All services require service discovery. The default is Consul or MDNS.
 
-### Consul 
+#### Consul
 
 Install
 ```
@@ -18,9 +21,26 @@ Run
 consul agent -dev
 ```
 
-### MDNS
+#### MDNS
 
 Use flag `--registry=mdns`
+
+
+### Protobuf
+
+Protobuf is used for code generation of message types and client/hander stubs.
+
+#### Install
+```shell
+go get github.com/micro/protobuf/{proto,protoc-gen-go}
+```
+
+#### Compile Proto
+
+```shell
+protoc -I$GOPATH/src --go_out=plugins=micro:$GOPATH/src \
+        $GOPATH/src/github.com/micro/examples/service/proto/greeter.proto
+```
 
 ## Here
 
