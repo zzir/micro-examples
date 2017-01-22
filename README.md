@@ -58,7 +58,9 @@ Use flag `--registry=mdns` for a zero dependency configuration
 
 ### Protobuf
 
-Protobuf is used for code generation of message types and client/hander stubs. If making changes recompile the protos.
+Protobuf is used for code generation of message types and client/hander stubs.
+
+If making changes recompile the protos.
 
 #### Install
 ```shell
