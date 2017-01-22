@@ -2,47 +2,7 @@
 
 This is a repository for micro examples. Feel free to contribute.
 
-## Deps
-
-
-### Discovery
-
-All services require service discovery. The default is Consul or MDNS.
-
-#### Consul
-
-Install
-```
-brew install consul
-```
-
-Run
-```
-consul agent -dev
-```
-
-#### MDNS
-
-Use flag `--registry=mdns`
-
-
-### Protobuf
-
-Protobuf is used for code generation of message types and client/hander stubs.
-
-#### Install
-```shell
-go get github.com/micro/protobuf/{proto,protoc-gen-go}
-```
-
-#### Compile Proto
-
-```shell
-protoc -I$GOPATH/src --go_out=plugins=micro:$GOPATH/src \
-        $GOPATH/src/github.com/micro/examples/service/proto/greeter.proto
-```
-
-## Here
+## Contents
 
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
 - [sidecar](sidecar) - Greeter service using the sidecar with multiple languages
@@ -73,4 +33,42 @@ protoc -I$GOPATH/src --go_out=plugins=micro:$GOPATH/src \
 - [trace-srv](https://github.com/micro/trace-srv) - A distributed tracing microservice in the realm of dapper, zipkin, etc
 - [twitter-srv](https://github.com/micro/twitter-srv) - A microservice for the twitter API
 - [user-srv](https://github.com/micro/user-srv)	- A microservice for user management and authentication
+
+## Dependencies
+
+### Service Discovery
+
+All services require service discovery. The default is Consul or MDNS.
+
+#### Consul
+
+Install
+```
+brew install consul
+```
+
+Run
+```
+consul agent -dev
+```
+
+#### Multicast DNS
+
+Use flag `--registry=mdns` for a zero dependency configuration
+
+### Protobuf
+
+Protobuf is used for code generation of message types and client/hander stubs. If making changes recompile the protos.
+
+#### Install
+```shell
+go get github.com/micro/protobuf/{proto,protoc-gen-go}
+```
+
+#### Compile Proto
+
+```shell
+protoc -I$GOPATH/src --go_out=plugins=micro:$GOPATH/src \
+        $GOPATH/src/github.com/micro/examples/service/proto/greeter.proto
+```
 
