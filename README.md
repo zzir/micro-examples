@@ -17,6 +17,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [shutdown](shutdown) - Demonstrates graceful shutdown via context cancellation
 - [template](template) - Api, web and srv service templates generated with the 'micro new' command
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
+- [flags](flags) - Using command line flags with a service
 
 ## External
 
