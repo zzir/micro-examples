@@ -8,13 +8,13 @@ import (
 	"golang.org/x/net/context"
 )
 
-type Redirect struct {}
+type Redirect struct{}
 
 func (r *Redirect) Url(ctx context.Context, req *api.Request, rsp *api.Response) error {
 	rsp.StatusCode = int32(301)
 	rsp.Header = map[string]*api.Pair{
 		"Location": &api.Pair{
-			Key: "Location",
+			Key:    "Location",
 			Values: []string{"https://google.com"},
 		},
 	}
