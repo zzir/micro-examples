@@ -14,11 +14,13 @@ Docker is required for running the services https://docs.docker.com/engine/insta
 
 Protobuf v3 are required:
 
-    $ brew install protobuf --devel
+    $ brew install protobuf
 
-Install the protoc-gen libraries:
+Install the protoc-gen libraries and other dependencies:
 
     $ go get -u github.com/micro/protobuf/{proto,protoc-gen-go}
+    $ go get github.com/micro/go-micro
+    $ go get github.com/hailocab/go-geoindex
 
 Clone the repository:
 
