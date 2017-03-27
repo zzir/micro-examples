@@ -7,7 +7,7 @@ import (
 	"github.com/micro/go-micro"
 	"golang.org/x/net/context"
 
-	proto "github.com/micro/micro/bot/proto"
+	proto "github.com/micro/go-bot/proto"
 )
 
 type Command struct{}
