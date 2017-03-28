@@ -167,34 +167,6 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
-// Publisher API
-
-type Publisher interface {
-	Publish(ctx context.Context, msg interface{}, opts ...client.PublishOption) error
-}
-
-type publisher struct {
-	c     client.Client
-	topic string
-}
-
-func (p *publisher) Publish(ctx context.Context, msg interface{}, opts ...client.PublishOption) error {
-	return p.c.Publish(ctx, p.c.NewPublication(p.topic, msg), opts...)
-}
-
-func NewPublisher(topic string, c client.Client) Publisher {
-	if c == nil {
-		c = client.NewClient()
-	}
-	return &publisher{c, topic}
-}
-
-// Subscriber API
-
-func RegisterSubscriber(topic string, s server.Server, h interface{}, opts ...server.SubscriberOption) error {
-	return s.Subscribe(s.NewSubscriber(topic, h, opts...))
-}
-
 // Client API for Example service
 
 type ExampleClient interface {

@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
+	"github.com/micro/go-micro"
 	"github.com/micro/examples/template/srv/handler"
 	"github.com/micro/examples/template/srv/subscriber"
-	"github.com/micro/go-micro"
 
 	example "github.com/micro/examples/template/srv/proto/example"
 )
@@ -21,10 +21,14 @@ func main() {
 	example.RegisterExampleHandler(service.Server(), new(handler.Example))
 
 	// Register Struct as Subscriber
-	example.RegisterSubscriber("topic.go.micro.srv.template", service.Server(), new(subscriber.Example))
+	service.Server().Subscribe(
+		service.Server().NewSubscriber("topic.go.micro.srv.template", new(subscriber.Example)),
+	)
 
 	// Register Function as Subscriber
-	example.RegisterSubscriber("topic.go.micro.srv.template", service.Server(), subscriber.Handler)
+	service.Server().Subscribe(
+		service.Server().NewSubscriber("topic.go.micro.srv.template", subscriber.Handler),
+	)
 
 	// Initialise service
 	service.Init()
