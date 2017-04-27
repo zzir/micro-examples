@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/micro/go-micro"
 	"github.com/micro/examples/template/srv/handler"
 	"github.com/micro/examples/template/srv/subscriber"
+	"github.com/micro/go-micro"
 
 	example "github.com/micro/examples/template/srv/proto/example"
 )

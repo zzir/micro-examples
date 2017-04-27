@@ -19,6 +19,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 - [flags](flags) - Using command line flags with a service
 - [command](command) - An example of bot commands as micro services
+- [stream](stream) - An example of a streaming service and client
 
 ## External
 
