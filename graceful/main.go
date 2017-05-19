@@ -10,7 +10,7 @@ import (
 )
 
 // graceful is a handler wrapper which adds a handler to a sync.WaitGroup
-func graceful(wg sync.WaitGroup) server.HandlerWrapper {
+func graceful(wg *sync.WaitGroup) server.HandlerWrapper {
 	return func(h server.HandlerFunc) server.HandlerFunc {
 		return func(ctx context.Context, req server.Request, rsp interface{}) error {
 			wg.Add(1)
@@ -25,7 +25,7 @@ func main() {
 
 	service := micro.NewService(
 		// wrap handlers with graceful wrapper
-		micro.WrapHandler(graceful(wg)),
+		micro.WrapHandler(graceful(&wg)),
 		// handler gracefully once stopped
 		micro.AfterStop(func() error {
 			// wait for handlers to finish
