@@ -12,6 +12,12 @@ Find out more on the usage at [micro/new](https://github.com/micro/micro/tree/ma
 micro new --type api --alias template github.com/micro/examples/template/api
 ```
 
+### FNC
+
+```
+micro new --type fnc --alias template github.com/micro/examples/template/fnc
+```
+
 ### SRV
 
 ```
