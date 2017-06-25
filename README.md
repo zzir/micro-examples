@@ -15,6 +15,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [plugins](plugins) - How to use plugins
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 - [redirect](redirect) - An example of how to http redirect using an API service
+- [secure](secure) - Demonstrates use of transport secure option for self signed certs
 - [server](server) - Use of the Server package directly to server requests.
 - [service](service) - Example of the top level Service in go-micro.
 - [shutdown](shutdown) - Demonstrates graceful shutdown via context cancellation
