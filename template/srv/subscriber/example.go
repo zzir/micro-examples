@@ -1,7 +1,7 @@
 package subscriber
 
 import (
-	"log"
+	"github.com/micro/go-log"
 
 	example "github.com/micro/examples/template/srv/proto/example"
 	"golang.org/x/net/context"
@@ -10,11 +10,11 @@ import (
 type Example struct{}
 
 func (e *Example) Handle(ctx context.Context, msg *example.Message) error {
-	log.Print("Handler Received message: ", msg.Say)
+	log.Log("Handler Received message: ", msg.Say)
 	return nil
 }
 
 func Handler(ctx context.Context, msg *example.Message) error {
-	log.Print("Function Received message: ", msg.Say)
+	log.Log("Function Received message: ", msg.Say)
 	return nil
 }

@@ -5,8 +5,6 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/examples/template/fnc/handler"
 	"github.com/micro/examples/template/fnc/subscriber"
-
-	example "github.com/micro/examples/template/fnc/proto/example"
 )
 
 func main() {
@@ -20,7 +18,7 @@ func main() {
 	function.Handle(new(handler.Example))
 
 	// Register Struct as Subscriber
-	function.Subscribe("topic.go.micro.fnc.template", new(subscriber.Example)),
+	function.Subscribe("topic.go.micro.fnc.template", new(subscriber.Example))
 
 	// Initialise function
 	function.Init()

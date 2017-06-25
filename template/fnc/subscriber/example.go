@@ -10,6 +10,6 @@ import (
 type Example struct{}
 
 func (e *Example) Handle(ctx context.Context, msg *example.Message) error {
-	log.Print("Handler Received message: ", msg.Say)
+	log.Log("Handler Received message: ", msg.Say)
 	return nil
 }

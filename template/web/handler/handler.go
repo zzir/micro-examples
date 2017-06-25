@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	example "github.com/micro/examples/template/srv/proto/example"
 	"github.com/micro/go-micro/client"
+	example "github.com/micro/examples/template/srv/proto/example"
 
 	"golang.org/x/net/context"
 )

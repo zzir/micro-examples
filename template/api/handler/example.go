@@ -2,12 +2,12 @@ package handler
 
 import (
 	"encoding/json"
-	"log"
+	"github.com/micro/go-log"
 
 	"github.com/micro/examples/template/api/client"
-	example "github.com/micro/examples/template/srv/proto/example"
 	"github.com/micro/go-micro/errors"
-	api "github.com/micro/micro/api/proto"
+	api "github.com/micro/go-api/proto"
+	example "github.com/micro/examples/template/srv/proto/example"
 
 	"golang.org/x/net/context"
 )
@@ -26,7 +26,7 @@ func extractValue(pair *api.Pair) string {
 
 // Example.Call is called by the API as /template/example/call with post body {"name": "foo"}
 func (e *Example) Call(ctx context.Context, req *api.Request, rsp *api.Response) error {
-	log.Print("Received Example.Call request")
+	log.Log("Received Example.Call request")
 
 	// extract the client from the context
 	exampleClient, ok := client.ExampleFromContext(ctx)
