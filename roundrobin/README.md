@@ -1,10 +1,10 @@
-# Sharding
+# Round Robin
 
-A sharding example using the greeter application and a X-From-User header as the sharding key
+An example of using a round robin client wrapper with the greeter application. 
 
 ## Contents
 
-- api.go - a modified version of the greeter api to include sharding
+- api.go - a modified version of the greeter api to include roundrobin
 
 ## Deps
 
@@ -53,9 +53,7 @@ micro api
 
 ### Call API
 
-Call the API with X-From-User header. Change the user to see the effects of sharding.
-
 ```shell
-curl  -H "X-From-User: john" http://localhost:8080/greeter/say/hello?name=John
+curl  http://localhost:8080/greeter/say/hello?name=John
 ```
 
