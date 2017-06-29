@@ -40,6 +40,12 @@ This is a repository for micro examples. Feel free to contribute.
 - [twitter-srv](https://github.com/micro/twitter-srv) - A microservice for the twitter API
 - [user-srv](https://github.com/micro/user-srv)	- A microservice for user management and authentication
 
+## Community
+
+Find contributions from the community via the [explorer](https://micro.mu/explore/)
+
+- [go-shopping](https://github.com/autodidaddict/go-shopping) - A sample product with a suite of services
+
 ## Dependencies
 
 ### Service Discovery
