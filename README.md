@@ -18,6 +18,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [secure](secure) - Demonstrates use of transport secure option for self signed certs
 - [server](server) - Use of the Server package directly to server requests.
 - [service](service) - Example of the top level Service in go-micro.
+- [sharding](sharding) - An example of how to shard requests or use session affinity
 - [shutdown](shutdown) - Demonstrates graceful shutdown via context cancellation
 - [sidecar](sidecar) - Greeter service using the sidecar with multiple languages
 - [stream](stream) - An example of a streaming service and client
