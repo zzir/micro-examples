@@ -24,6 +24,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [sidecar](sidecar) - Greeter service using the sidecar with multiple languages
 - [stream](stream) - An example of a streaming service and client
 - [template](template) - Api, web and srv service templates generated with the 'micro new' command
+- [waitgroup](waitgroup) - Demonstrates how to use a waitgroup with a service
 
 ## External
 

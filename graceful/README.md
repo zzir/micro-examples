@@ -1,6 +1,6 @@
 # Graceful
 
-Graceful demonstrates graceful shutdown of a service using sync.WaitGroup.
+Graceful demonstrates graceful shutdown of a service using the server.Wait option
 
-It adds each handler executed to sync.WaitGroup which can be waited on before exiting.
+The server deregisters the service and waits for handlers to finish executing before exiting.
 
