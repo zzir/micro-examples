@@ -20,7 +20,7 @@ import "github.com/micro/go-grpc"
 service := grpc.NewService()
 ```
 
-## Pre-existing Service
+## Pre-existing Service
 
 What if you want to add grpc to a pre-existing service? Use the build pattern for plugins but swap out the client/server.
 
