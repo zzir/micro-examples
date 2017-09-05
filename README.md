@@ -12,6 +12,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [function](function) - Example of using Function programming model
 - [graceful](graceful) - Demonstrates graceful shutdown of a service
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
+- [metadata](metadata) - Extracting metadata from context of a request
 - [plugins](plugins) - How to use plugins
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 - [redirect](redirect) - An example of how to http redirect using an API service
