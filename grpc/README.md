@@ -4,6 +4,7 @@ Contains examples for using [go-grpc](https://github.com/micro/go-grpc)
 
 - [greeter](greeter) - A greeter example
 - [gateway](gateway) - A grpc gateway example
+- [sidecar](sidecar) - Using the micro sidecar for http
 
 ## New service
 
