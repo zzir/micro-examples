@@ -43,7 +43,7 @@ import (
 Build the toolkit with the grpc plugin
 
 ```
-go build -i -o micro ./main.go ./plugins.go
+go build -i -o micro ./main.go ./plugin.go
 ```
 
 Run the sidecar
