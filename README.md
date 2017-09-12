@@ -14,6 +14,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
 - [metadata](metadata) - Extracting metadata from context of a request
 - [plugins](plugins) - How to use plugins
+- [pubsub](pubsub) - Example of using pubsub at the client/server level
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 - [redirect](redirect) - An example of how to http redirect using an API service
 - [roundrobin](roundrobin) - A stateful client wrapper for true round robin of requests
