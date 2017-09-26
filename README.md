@@ -10,6 +10,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [client](client) - Usage of the Client package to call a service.
 - [command](command) - An example of bot commands as micro services
 - [flags](flags) - Using command line flags with a service
+- [form](form) - How to parse a form behind the micro api
 - [function](function) - Example of using Function programming model
 - [graceful](graceful) - Demonstrates graceful shutdown of a service
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
