@@ -5,7 +5,6 @@ import (
 
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
-	"github.com/micro/go-micro/metadata"
 
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 
@@ -18,14 +17,8 @@ func main() {
 	// Use the generated client stub
 	cl := hello.NewSayClient("go.micro.srv.greeter", client.DefaultClient)
 
-	// Set arbitrary headers in context
-	ctx := metadata.NewContext(context.Background(), map[string]string{
-		"X-User-Id": "john",
-		"X-From-Id": "script",
-	})
-
 	// Make request
-	rsp, err := cl.Hello(ctx, &hello.Request{
+	rsp, err := cl.Hello(context.Background(), &hello.Request{
 		Name: "John",
 	})
 	if err != nil {
