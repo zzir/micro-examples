@@ -16,6 +16,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
 - [heartbeat](heartbeat) - Make services heartbeat with discovery for high availability
 - [metadata](metadata) - Extracting metadata from context of a request
+- [options](options) - Setting options in the go-micro framework
 - [plugins](plugins) - How to use plugins
 - [pubsub](pubsub) - Example of using pubsub at the client/server level
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
