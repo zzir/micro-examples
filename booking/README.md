@@ -47,6 +47,7 @@ Curl the endpoint with an invalid auth token:
 
     $ curl -H 'Content-Type: application/json' \
            -H "Authorization: Bearer INVALID_TOKEN" \
+           -d '{"inDate": "2015-04-09"}' \
             http://localhost:8080/hotel/rates
 
     {"id":"api.hotel.rates","code":401,"detail":"Unauthorized","status":"Unauthorized"}
