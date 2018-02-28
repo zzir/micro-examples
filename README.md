@@ -85,8 +85,15 @@ Protobuf is used for code generation of message types and client/hander stubs.
 If making changes recompile the protos.
 
 #### Install
+
+Install [protoc](https://github.com/google/protobuf) for your environment. Then:
+
 ```shell
-go get github.com/micro/protobuf/{proto,protoc-gen-go}
+go get github.com/golang/protobuf/{proto,protoc-gen-go}
+```
+
+```shell
+go get github.com/micro/protoc-gen-micro
 ```
 
 #### Compile Proto
