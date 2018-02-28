@@ -99,7 +99,6 @@ go get github.com/micro/protoc-gen-micro
 #### Compile Proto
 
 ```shell
-protoc -I$GOPATH/src --go_out=plugins=micro:$GOPATH/src \
-        $GOPATH/src/github.com/micro/examples/service/proto/greeter.proto
+protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. path/to/proto
 ```
 
