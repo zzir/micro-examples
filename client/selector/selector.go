@@ -117,7 +117,7 @@ func main() {
 		client.Selector(FirstNodeSelector()),
 	)
 
-	fmt.Println("\n--- Call example ---\n")
+	fmt.Println("\n--- Call example ---")
 	for i := 0; i < 10; i++ {
 		call(i)
 	}

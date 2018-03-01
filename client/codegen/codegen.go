@@ -66,14 +66,14 @@ func pingPong(i int) {
 func main() {
 	cmd.Init()
 
-	fmt.Println("\n--- Call example ---\n")
+	fmt.Println("\n--- Call example ---")
 	for i := 0; i < 10; i++ {
 		call(i)
 	}
 
-	fmt.Println("\n--- Streamer example ---\n")
+	fmt.Println("\n--- Streamer example ---")
 	stream(10)
 
-	fmt.Println("\n--- Ping Pong example ---\n")
+	fmt.Println("\n--- Ping Pong example ---")
 	pingPong(10)
 }

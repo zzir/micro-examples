@@ -127,7 +127,7 @@ func main() {
 		client.Selector(DCSelector()),
 	)
 
-	fmt.Println("\n--- Call example ---\n")
+	fmt.Println("\n--- Call example ---")
 	for i := 0; i < 10; i++ {
 		call(i)
 	}

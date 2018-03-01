@@ -81,14 +81,14 @@ func call(i int) {
 func main() {
 	cmd.Init()
 
-	fmt.Println("\n--- Log Wrapper example ---\n")
+	fmt.Println("\n--- Log Wrapper example ---")
 
 	// Wrap the default client
 	client.DefaultClient = logWrap(client.DefaultClient)
 
 	call(0)
 
-	fmt.Println("\n--- Log+Trace Wrapper example ---\n")
+	fmt.Println("\n--- Log+Trace Wrapper example ---")
 
 	// Wrap using client.Wrap option
 	client.DefaultClient = client.NewClient(
@@ -98,7 +98,7 @@ func main() {
 
 	call(1)
 
-	fmt.Println("\n--- Metrics Wrapper example ---\n")
+	fmt.Println("\n--- Metrics Wrapper example ---")
 
 	// Wrap using client.Wrap option
 	client.DefaultClient = client.NewClient(

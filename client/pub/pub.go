@@ -33,7 +33,7 @@ func pub(i int) {
 
 func main() {
 	cmd.Init()
-	fmt.Println("\n--- Publisher example ---\n")
+	fmt.Println("\n--- Publisher example ---")
 	for i := 0; i < 10; i++ {
 		pub(i)
 	}
