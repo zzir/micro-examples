@@ -8,7 +8,7 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/errors"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Example struct{}

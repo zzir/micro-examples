@@ -11,7 +11,7 @@ import (
 	"github.com/micro/go-plugins/wrapper/select/shard"
 	api "github.com/micro/micro/api/proto"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Say struct {

@@ -7,7 +7,7 @@ import (
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/transport"
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Say struct{}

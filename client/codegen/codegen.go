@@ -5,7 +5,7 @@ import (
 
 	example "github.com/micro/examples/server/proto/example"
 	"github.com/micro/go-micro/cmd"
-	"golang.org/x/net/context"
+	"context"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 	"github.com/micro/examples/booking/data"
 	"github.com/micro/examples/booking/srv/profile/proto"
 
-	"golang.org/x/net/context"
+	"context"
 	"golang.org/x/net/trace"
 
 	"github.com/micro/go-micro"

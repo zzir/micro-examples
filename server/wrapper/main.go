@@ -7,7 +7,7 @@ import (
 	"github.com/micro/examples/server/subscriber"
 	"github.com/micro/go-micro/cmd"
 	"github.com/micro/go-micro/server"
-	"golang.org/x/net/context"
+	"context"
 )
 
 func logWrapper(fn server.HandlerFunc) server.HandlerFunc {

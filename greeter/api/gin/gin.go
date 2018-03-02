@@ -9,7 +9,7 @@ import (
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-web"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Say struct{}

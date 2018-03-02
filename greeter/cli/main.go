@@ -1,21 +1,22 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/cmd"
-
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
-
-	"golang.org/x/net/context"
+	"github.com/micro/go-micro"
 )
 
 func main() {
-	cmd.Init()
+	// create a new service
+	service := micro.NewService()
+
+	// parse command line flags
+	service.Init()
 
 	// Use the generated client stub
-	cl := hello.NewSayClient("go.micro.srv.greeter", client.DefaultClient)
+	cl := hello.NewSayClient("go.micro.srv.greeter", service.Client())
 
 	// Make request
 	rsp, err := cl.Hello(context.Background(), &hello.Request{

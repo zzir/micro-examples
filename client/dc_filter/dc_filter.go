@@ -10,7 +10,7 @@ import (
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/selector"
-	"golang.org/x/net/context"
+	"context"
 
 	example "github.com/micro/examples/server/proto/example"
 )

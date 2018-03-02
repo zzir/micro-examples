@@ -5,7 +5,7 @@ import (
 
 	proto "github.com/micro/examples/stream/server/proto"
 	"github.com/micro/go-micro"
-	"golang.org/x/net/context"
+	"context"
 )
 
 func bidirectional(cl proto.StreamerClient) {

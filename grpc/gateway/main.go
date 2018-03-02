@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"golang.org/x/net/context"
+	"context"
 	"google.golang.org/grpc"
 
 	hello "github.com/micro/examples/grpc/gateway/proto/hello"

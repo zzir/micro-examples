@@ -10,7 +10,7 @@ import (
 
 	uuid "github.com/nu7hatch/gouuid"
 
-	"golang.org/x/net/context"
+	"context"
 	"golang.org/x/net/trace"
 
 	"github.com/micro/examples/booking/api/hotel/proto"

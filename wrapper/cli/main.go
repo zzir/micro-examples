@@ -6,7 +6,7 @@ import (
 	proto "github.com/micro/examples/service/proto"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
-	"golang.org/x/net/context"
+	"context"
 )
 
 // log wrapper logs every time a request is made

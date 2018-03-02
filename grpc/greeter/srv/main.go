@@ -8,7 +8,7 @@ import (
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-micro"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Say struct{}

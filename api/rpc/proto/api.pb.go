@@ -19,12 +19,6 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
-import (
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
-	context "golang.org/x/net/context"
-)
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -89,115 +83,6 @@ func init() {
 	proto.RegisterType((*CallResponse)(nil), "CallResponse")
 	proto.RegisterType((*EmptyRequest)(nil), "EmptyRequest")
 	proto.RegisterType((*EmptyResponse)(nil), "EmptyResponse")
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ client.Option
-var _ server.Option
-
-// Client API for Example service
-
-type ExampleClient interface {
-	Call(ctx context.Context, in *CallRequest, opts ...client.CallOption) (*CallResponse, error)
-}
-
-type exampleClient struct {
-	c           client.Client
-	serviceName string
-}
-
-func NewExampleClient(serviceName string, c client.Client) ExampleClient {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(serviceName) == 0 {
-		serviceName = "example"
-	}
-	return &exampleClient{
-		c:           c,
-		serviceName: serviceName,
-	}
-}
-
-func (c *exampleClient) Call(ctx context.Context, in *CallRequest, opts ...client.CallOption) (*CallResponse, error) {
-	req := c.c.NewRequest(c.serviceName, "Example.Call", in)
-	out := new(CallResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for Example service
-
-type ExampleHandler interface {
-	Call(context.Context, *CallRequest, *CallResponse) error
-}
-
-func RegisterExampleHandler(s server.Server, hdlr ExampleHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Example{hdlr}, opts...))
-}
-
-type Example struct {
-	ExampleHandler
-}
-
-func (h *Example) Call(ctx context.Context, in *CallRequest, out *CallResponse) error {
-	return h.ExampleHandler.Call(ctx, in, out)
-}
-
-// Client API for Foo service
-
-type FooClient interface {
-	Bar(ctx context.Context, in *EmptyRequest, opts ...client.CallOption) (*EmptyResponse, error)
-}
-
-type fooClient struct {
-	c           client.Client
-	serviceName string
-}
-
-func NewFooClient(serviceName string, c client.Client) FooClient {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(serviceName) == 0 {
-		serviceName = "foo"
-	}
-	return &fooClient{
-		c:           c,
-		serviceName: serviceName,
-	}
-}
-
-func (c *fooClient) Bar(ctx context.Context, in *EmptyRequest, opts ...client.CallOption) (*EmptyResponse, error) {
-	req := c.c.NewRequest(c.serviceName, "Foo.Bar", in)
-	out := new(EmptyResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for Foo service
-
-type FooHandler interface {
-	Bar(context.Context, *EmptyRequest, *EmptyResponse) error
-}
-
-func RegisterFooHandler(s server.Server, hdlr FooHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Foo{hdlr}, opts...))
-}
-
-type Foo struct {
-	FooHandler
-}
-
-func (h *Foo) Bar(ctx context.Context, in *EmptyRequest, out *EmptyResponse) error {
-	return h.FooHandler.Bar(ctx, in, out)
 }
 
 func init() { proto.RegisterFile("github.com/micro/examples/api/rpc/proto/api.proto", fileDescriptor0) }

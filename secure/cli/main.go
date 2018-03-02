@@ -8,7 +8,7 @@ import (
 
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 func init() {

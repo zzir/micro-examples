@@ -10,7 +10,7 @@ import (
 	"github.com/micro/go-micro/errors"
 	api "github.com/micro/micro/api/proto"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Say struct {

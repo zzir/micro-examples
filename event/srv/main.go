@@ -5,7 +5,7 @@ import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 // All methods of Event will be executed when a message is received

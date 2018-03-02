@@ -7,7 +7,7 @@ import (
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/server"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 // All methods of Sub will be executed when

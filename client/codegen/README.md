@@ -132,7 +132,7 @@ func RegisterSayHandler(s server.Server, hdlr SayHandler) {
 import (
 	"fmt"
 
-	"golang.org/x/net/context"
+	"context"
 	"github.com/micro/go-micro/client"
 	hello "path/to/hello/proto"
 )

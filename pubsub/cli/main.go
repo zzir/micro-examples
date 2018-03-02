@@ -8,7 +8,7 @@ import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 	"github.com/pborman/uuid"
-	"golang.org/x/net/context"
+	"context"
 )
 
 // send events using the publisher

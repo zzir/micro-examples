@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/micro/go-micro"
-	"golang.org/x/net/context"
+	"context"
 
 	proto "github.com/micro/go-bot/proto"
 )

@@ -3,7 +3,7 @@ package main
 import (
 	proto "github.com/micro/examples/function/proto"
 	"github.com/micro/go-micro"
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Greeter struct{}

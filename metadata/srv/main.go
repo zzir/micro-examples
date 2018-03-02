@@ -9,7 +9,7 @@ import (
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/metadata"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Say struct{}

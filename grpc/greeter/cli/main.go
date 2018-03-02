@@ -7,7 +7,7 @@ import (
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-micro/metadata"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 func main() {

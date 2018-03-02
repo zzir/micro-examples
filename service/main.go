@@ -7,7 +7,7 @@ import (
 	"github.com/micro/cli"
 	proto "github.com/micro/examples/service/proto"
 	"github.com/micro/go-micro"
-	"golang.org/x/net/context"
+	"context"
 )
 
 /*

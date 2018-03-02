@@ -8,7 +8,7 @@ import (
 	"github.com/micro/go-micro/client"
 	example "github.com/micro/examples/template/srv/proto/example"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 func ExampleCall(w http.ResponseWriter, r *http.Request) {

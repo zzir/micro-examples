@@ -4,7 +4,7 @@ import "github.com/micro/go-api/proto/api.proto";
 
 service Form {
 	// regular form
-	rpc Submit(go.micro.api.Request) returns (go.micro.api.Response) {};
+	rpc Submit(go.api.Request) returns (go.api.Response) {};
 	// multipart form
-	rpc Multipart(go.micro.api.Request) returns (go.micro.api.Response) {};
+	rpc Multipart(go.api.Request) returns (go.api.Response) {};
 }

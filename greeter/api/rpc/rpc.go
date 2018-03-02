@@ -7,7 +7,7 @@ import (
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 	"github.com/micro/go-micro"
 
-	"golang.org/x/net/context"
+	"context"
 )
 
 type Greeter struct {
