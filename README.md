@@ -16,6 +16,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [graceful](graceful) - Demonstrates graceful shutdown of a service
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
 - [heartbeat](heartbeat) - Make services heartbeat with discovery for high availability
+- [helloworld](helloworld) - Hello world using micro
 - [metadata](metadata) - Extracting metadata from context of a request
 - [options](options) - Setting options in the go-micro framework
 - [plugins](plugins) - How to use plugins
