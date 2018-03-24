@@ -23,9 +23,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -46,31 +46,31 @@ var _ server.Option
 
 // Client API for Example service
 
-type ExampleClient interface {
+type ExampleService interface {
 	Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Example_StreamClient, error)
-	PingPong(ctx context.Context, opts ...client.CallOption) (Example_PingPongClient, error)
+	Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Example_StreamService, error)
+	PingPong(ctx context.Context, opts ...client.CallOption) (Example_PingPongService, error)
 }
 
-type exampleClient struct {
+type exampleService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewExampleClient(serviceName string, c client.Client) ExampleClient {
+func ExampleServiceClient(serviceName string, c client.Client) ExampleService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "go.micro.srv.example"
 	}
-	return &exampleClient{
+	return &exampleService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *exampleClient) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+func (c *exampleService) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
 	req := c.c.NewRequest(c.serviceName, "Example.Call", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -80,7 +80,7 @@ func (c *exampleClient) Call(ctx context.Context, in *Request, opts ...client.Ca
 	return out, nil
 }
 
-func (c *exampleClient) Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Example_StreamClient, error) {
+func (c *exampleService) Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (Example_StreamService, error) {
 	req := c.c.NewRequest(c.serviceName, "Example.Stream", &StreamingRequest{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
@@ -89,33 +89,33 @@ func (c *exampleClient) Stream(ctx context.Context, in *StreamingRequest, opts .
 	if err := stream.Send(in); err != nil {
 		return nil, err
 	}
-	return &exampleStreamClient{stream}, nil
+	return &exampleStreamService{stream}, nil
 }
 
-type Example_StreamClient interface {
+type Example_StreamService interface {
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
 	Recv() (*StreamingResponse, error)
 }
 
-type exampleStreamClient struct {
+type exampleStreamService struct {
 	stream client.Streamer
 }
 
-func (x *exampleStreamClient) Close() error {
+func (x *exampleStreamService) Close() error {
 	return x.stream.Close()
 }
 
-func (x *exampleStreamClient) SendMsg(m interface{}) error {
+func (x *exampleStreamService) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *exampleStreamClient) RecvMsg(m interface{}) error {
+func (x *exampleStreamService) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *exampleStreamClient) Recv() (*StreamingResponse, error) {
+func (x *exampleStreamService) Recv() (*StreamingResponse, error) {
 	m := new(StreamingResponse)
 	err := x.stream.Recv(m)
 	if err != nil {
@@ -124,16 +124,16 @@ func (x *exampleStreamClient) Recv() (*StreamingResponse, error) {
 	return m, nil
 }
 
-func (c *exampleClient) PingPong(ctx context.Context, opts ...client.CallOption) (Example_PingPongClient, error) {
+func (c *exampleService) PingPong(ctx context.Context, opts ...client.CallOption) (Example_PingPongService, error) {
 	req := c.c.NewRequest(c.serviceName, "Example.PingPong", &Ping{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &examplePingPongClient{stream}, nil
+	return &examplePingPongService{stream}, nil
 }
 
-type Example_PingPongClient interface {
+type Example_PingPongService interface {
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
@@ -141,27 +141,27 @@ type Example_PingPongClient interface {
 	Recv() (*Pong, error)
 }
 
-type examplePingPongClient struct {
+type examplePingPongService struct {
 	stream client.Streamer
 }
 
-func (x *examplePingPongClient) Close() error {
+func (x *examplePingPongService) Close() error {
 	return x.stream.Close()
 }
 
-func (x *examplePingPongClient) SendMsg(m interface{}) error {
+func (x *examplePingPongService) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *examplePingPongClient) RecvMsg(m interface{}) error {
+func (x *examplePingPongService) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *examplePingPongClient) Send(m *Ping) error {
+func (x *examplePingPongService) Send(m *Ping) error {
 	return x.stream.Send(m)
 }
 
-func (x *examplePingPongClient) Recv() (*Pong, error) {
+func (x *examplePingPongService) Recv() (*Pong, error) {
 	m := new(Pong)
 	err := x.stream.Recv(m)
 	if err != nil {

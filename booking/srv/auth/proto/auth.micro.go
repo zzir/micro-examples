@@ -19,9 +19,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -42,29 +42,29 @@ var _ server.Option
 
 // Client API for Auth service
 
-type AuthClient interface {
+type AuthService interface {
 	VerifyToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error)
 }
 
-type authClient struct {
+type authService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewAuthClient(serviceName string, c client.Client) AuthClient {
+func AuthServiceClient(serviceName string, c client.Client) AuthService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "auth"
 	}
-	return &authClient{
+	return &authService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *authClient) VerifyToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
+func (c *authService) VerifyToken(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
 	req := c.c.NewRequest(c.serviceName, "Auth.VerifyToken", in)
 	out := new(Result)
 	err := c.c.Call(ctx, req, out, opts...)

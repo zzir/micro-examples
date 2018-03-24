@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
+	"context"
 	"github.com/micro/go-micro"
 	api "github.com/micro/micro/api/proto"
-	"context"
 )
 
 type Redirect struct{}

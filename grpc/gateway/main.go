@@ -4,9 +4,9 @@ import (
 	"flag"
 	"net/http"
 
+	"context"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"context"
 	"google.golang.org/grpc"
 
 	hello "github.com/micro/examples/grpc/gateway/proto/hello"

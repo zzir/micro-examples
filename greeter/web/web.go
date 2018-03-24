@@ -26,7 +26,7 @@ func main() {
 				name = "World"
 			}
 
-			cl := hello.NewSayClient("go.micro.srv.greeter", client.DefaultClient)
+			cl := hello.SayServiceClient("go.micro.srv.greeter", client.DefaultClient)
 			rsp, err := cl.Hello(context.Background(), &hello.Request{
 				Name: name,
 			})

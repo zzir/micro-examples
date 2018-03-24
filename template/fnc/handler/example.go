@@ -1,8 +1,8 @@
 package handler
 
 import (
-	example "github.com/micro/examples/template/fnc/proto/example"
 	"context"
+	example "github.com/micro/examples/template/fnc/proto/example"
 )
 
 type Example struct{}

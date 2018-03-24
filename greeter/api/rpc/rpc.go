@@ -11,7 +11,7 @@ import (
 )
 
 type Greeter struct {
-	Client hello.SayClient
+	Client hello.SayService
 }
 
 func (g *Greeter) Hello(ctx context.Context, req *proto.Request, rsp *proto.Response) error {
@@ -40,7 +40,7 @@ func main() {
 	// Register Handlers
 	proto.RegisterGreeterHandler(service.Server(), &Greeter{
 		// Create Service Client
-		Client: hello.NewSayClient("go.micro.srv.greeter", service.Client()),
+		Client: hello.SayServiceClient("go.micro.srv.greeter", service.Client()),
 	})
 
 	// for handler use

@@ -20,9 +20,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -43,30 +43,30 @@ var _ server.Option
 
 // Client API for Rate service
 
-type RateClient interface {
+type RateService interface {
 	// GetRates returns rate codes for hotels for a given date range
 	GetRates(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error)
 }
 
-type rateClient struct {
+type rateService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewRateClient(serviceName string, c client.Client) RateClient {
+func RateServiceClient(serviceName string, c client.Client) RateService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "rate"
 	}
-	return &rateClient{
+	return &rateService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *rateClient) GetRates(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
+func (c *rateService) GetRates(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
 	req := c.c.NewRequest(c.serviceName, "Rate.GetRates", in)
 	out := new(Result)
 	err := c.c.Call(ctx, req, out, opts...)

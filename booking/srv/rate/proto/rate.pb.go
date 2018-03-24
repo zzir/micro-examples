@@ -19,6 +19,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -187,6 +192,80 @@ func init() {
 	proto.RegisterType((*Result)(nil), "rate.Result")
 	proto.RegisterType((*RatePlan)(nil), "rate.RatePlan")
 	proto.RegisterType((*RoomType)(nil), "rate.RoomType")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Rate service
+
+type RateClient interface {
+	// GetRates returns rate codes for hotels for a given date range
+	GetRates(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Result, error)
+}
+
+type rateClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRateClient(cc *grpc.ClientConn) RateClient {
+	return &rateClient{cc}
+}
+
+func (c *rateClient) GetRates(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Result, error) {
+	out := new(Result)
+	err := grpc.Invoke(ctx, "/rate.Rate/GetRates", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Rate service
+
+type RateServer interface {
+	// GetRates returns rate codes for hotels for a given date range
+	GetRates(context.Context, *Request) (*Result, error)
+}
+
+func RegisterRateServer(s *grpc.Server, srv RateServer) {
+	s.RegisterService(&_Rate_serviceDesc, srv)
+}
+
+func _Rate_GetRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RateServer).GetRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rate.Rate/GetRates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RateServer).GetRates(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Rate_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "rate.Rate",
+	HandlerType: (*RateServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetRates",
+			Handler:    _Rate_GetRates_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/booking/srv/rate/proto/rate.proto",
 }
 
 func init() {

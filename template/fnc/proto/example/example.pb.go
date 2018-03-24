@@ -18,6 +18,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -81,6 +86,78 @@ func init() {
 	proto.RegisterType((*Message)(nil), "go.micro.fnc.template.Message")
 	proto.RegisterType((*Request)(nil), "go.micro.fnc.template.Request")
 	proto.RegisterType((*Response)(nil), "go.micro.fnc.template.Response")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Example service
+
+type ExampleClient interface {
+	Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+}
+
+type exampleClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewExampleClient(cc *grpc.ClientConn) ExampleClient {
+	return &exampleClient{cc}
+}
+
+func (c *exampleClient) Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := grpc.Invoke(ctx, "/go.micro.fnc.template.Example/Call", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Example service
+
+type ExampleServer interface {
+	Call(context.Context, *Request) (*Response, error)
+}
+
+func RegisterExampleServer(s *grpc.Server, srv ExampleServer) {
+	s.RegisterService(&_Example_serviceDesc, srv)
+}
+
+func _Example_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExampleServer).Call(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/go.micro.fnc.template.Example/Call",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExampleServer).Call(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Example_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "go.micro.fnc.template.Example",
+	HandlerType: (*ExampleServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Call",
+			Handler:    _Example_Call_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/template/fnc/proto/example/example.proto",
 }
 
 func init() {

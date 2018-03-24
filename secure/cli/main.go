@@ -20,7 +20,7 @@ func init() {
 }
 
 func main() {
-	cl := hello.NewSayClient("go.micro.srv.greeter", client.DefaultClient)
+	cl := hello.SayServiceClient("go.micro.srv.greeter", client.DefaultClient)
 
 	rsp, err := cl.Hello(context.TODO(), &hello.Request{
 		Name: "John",

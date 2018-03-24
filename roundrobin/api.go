@@ -15,7 +15,7 @@ import (
 )
 
 type Say struct {
-	Client hello.SayClient
+	Client hello.SayService
 }
 
 func (s *Say) Hello(ctx context.Context, req *api.Request, rsp *api.Response) error {
@@ -55,7 +55,7 @@ func main() {
 
 	service.Server().Handle(
 		service.Server().NewHandler(
-			&Say{Client: hello.NewSayClient("go.micro.srv.greeter", service.Client())},
+			&Say{Client: hello.SayServiceClient("go.micro.srv.greeter", service.Client())},
 		),
 	)
 

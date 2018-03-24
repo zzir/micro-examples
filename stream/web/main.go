@@ -6,18 +6,18 @@ import (
 	"net/http"
 	"time"
 
+	"context"
 	"github.com/gorilla/websocket"
 	proto "github.com/micro/examples/stream/server/proto"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-web"
-	"context"
 )
 
 var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
-func Stream(cli proto.StreamerClient, ws *websocket.Conn) error {
+func Stream(cli proto.StreamerService, ws *websocket.Conn) error {
 	// Read initial request from websocket
 	var req proto.Request
 	err := ws.ReadJSON(&req)
@@ -93,7 +93,7 @@ func main() {
 
 	// New RPC client
 	rpcClient := client.NewClient(client.RequestTimeout(time.Second * 120))
-	cli := proto.NewStreamerClient("go.micro.srv.stream", rpcClient)
+	cli := proto.StreamerServiceClient("go.micro.srv.stream", rpcClient)
 
 	// Serve static html/js
 	service.Handle("/", http.FileServer(http.Dir("html")))

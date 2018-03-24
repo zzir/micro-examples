@@ -20,9 +20,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -43,29 +43,29 @@ var _ server.Option
 
 // Client API for Example service
 
-type ExampleClient interface {
+type ExampleService interface {
 	Call(ctx context.Context, in *CallRequest, opts ...client.CallOption) (*CallResponse, error)
 }
 
-type exampleClient struct {
+type exampleService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewExampleClient(serviceName string, c client.Client) ExampleClient {
+func ExampleServiceClient(serviceName string, c client.Client) ExampleService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "example"
 	}
-	return &exampleClient{
+	return &exampleService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *exampleClient) Call(ctx context.Context, in *CallRequest, opts ...client.CallOption) (*CallResponse, error) {
+func (c *exampleService) Call(ctx context.Context, in *CallRequest, opts ...client.CallOption) (*CallResponse, error) {
 	req := c.c.NewRequest(c.serviceName, "Example.Call", in)
 	out := new(CallResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -95,29 +95,29 @@ func (h *Example) Call(ctx context.Context, in *CallRequest, out *CallResponse) 
 
 // Client API for Foo service
 
-type FooClient interface {
+type FooService interface {
 	Bar(ctx context.Context, in *EmptyRequest, opts ...client.CallOption) (*EmptyResponse, error)
 }
 
-type fooClient struct {
+type fooService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewFooClient(serviceName string, c client.Client) FooClient {
+func FooServiceClient(serviceName string, c client.Client) FooService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "foo"
 	}
-	return &fooClient{
+	return &fooService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *fooClient) Bar(ctx context.Context, in *EmptyRequest, opts ...client.CallOption) (*EmptyResponse, error) {
+func (c *fooService) Bar(ctx context.Context, in *EmptyRequest, opts ...client.CallOption) (*EmptyResponse, error) {
 	req := c.c.NewRequest(c.serviceName, "Foo.Bar", in)
 	out := new(EmptyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
