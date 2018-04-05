@@ -8,8 +8,8 @@ json there is no code generation or use of protobuf required.
 
 ## Contents
 
-- main.go - is the main definition of the service, handler and client
-- client - defines the client which specifies use of json
+- main.go - is a micro greeter service
+- client - is a micro json client
 
 ## Prereqs
 
