@@ -1,5 +1,7 @@
 # Sidecar Examples
 
+Note: Example is out of date and will be replaced with a new micro component soon
+
 The [micro sidecar](https://github.com/micro/micro/tree/master/car) is a language agnostic proxy or service mesh which provides all the features 
 of [go-micro](https://github.com/micro/go-micro) as HTTP endpoints. To learn more about the sidecar look [here](https://github.com/micro/micro/tree/master/car).
 

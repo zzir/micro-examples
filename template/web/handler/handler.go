@@ -1,14 +1,13 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"time"
 
-	"github.com/micro/go-micro/client"
 	example "github.com/micro/examples/template/srv/proto/example"
-
-	"context"
+	"github.com/micro/go-micro/client"
 )
 
 func ExampleCall(w http.ResponseWriter, r *http.Request) {
@@ -20,7 +19,7 @@ func ExampleCall(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// call the backend service
-	exampleClient := example.NewExampleClient("go.micro.srv.template", client.DefaultClient)
+	exampleClient := example.ExampleServiceClient("go.micro.srv.template", client.DefaultClient)
 	rsp, err := exampleClient.Call(context.TODO(), &example.Request{
 		Name: request["name"].(string),
 	})

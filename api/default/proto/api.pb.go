@@ -14,7 +14,12 @@ package api
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/micro/go-api/proto"
+import go_api "github.com/micro/go-api/proto"
+
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -26,6 +31,142 @@ var _ = math.Inf
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Example service
+
+type ExampleClient interface {
+	Call(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error)
+}
+
+type exampleClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewExampleClient(cc *grpc.ClientConn) ExampleClient {
+	return &exampleClient{cc}
+}
+
+func (c *exampleClient) Call(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error) {
+	out := new(go_api.Response)
+	err := grpc.Invoke(ctx, "/Example/Call", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Example service
+
+type ExampleServer interface {
+	Call(context.Context, *go_api.Request) (*go_api.Response, error)
+}
+
+func RegisterExampleServer(s *grpc.Server, srv ExampleServer) {
+	s.RegisterService(&_Example_serviceDesc, srv)
+}
+
+func _Example_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(go_api.Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExampleServer).Call(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Example/Call",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExampleServer).Call(ctx, req.(*go_api.Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Example_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "Example",
+	HandlerType: (*ExampleServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Call",
+			Handler:    _Example_Call_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/api/default/proto/api.proto",
+}
+
+// Client API for Foo service
+
+type FooClient interface {
+	Bar(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error)
+}
+
+type fooClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewFooClient(cc *grpc.ClientConn) FooClient {
+	return &fooClient{cc}
+}
+
+func (c *fooClient) Bar(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error) {
+	out := new(go_api.Response)
+	err := grpc.Invoke(ctx, "/Foo/Bar", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Foo service
+
+type FooServer interface {
+	Bar(context.Context, *go_api.Request) (*go_api.Response, error)
+}
+
+func RegisterFooServer(s *grpc.Server, srv FooServer) {
+	s.RegisterService(&_Foo_serviceDesc, srv)
+}
+
+func _Foo_Bar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(go_api.Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FooServer).Bar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Foo/Bar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FooServer).Bar(ctx, req.(*go_api.Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Foo_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "Foo",
+	HandlerType: (*FooServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Bar",
+			Handler:    _Foo_Bar_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/api/default/proto/api.proto",
+}
 
 func init() {
 	proto.RegisterFile("github.com/micro/examples/api/default/proto/api.proto", fileDescriptor0)

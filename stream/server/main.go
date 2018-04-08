@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/micro/go-micro"
 	"context"
+	"github.com/micro/go-micro"
 
 	proto "github.com/micro/examples/stream/server/proto"
 )

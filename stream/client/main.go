@@ -3,12 +3,12 @@ package main
 import (
 	"fmt"
 
+	"context"
 	proto "github.com/micro/examples/stream/server/proto"
 	"github.com/micro/go-micro"
-	"context"
 )
 
-func bidirectional(cl proto.StreamerClient) {
+func bidirectional(cl proto.StreamerService) {
 	// create streaming client
 	stream, err := cl.Stream(context.Background())
 	if err != nil {
@@ -37,7 +37,7 @@ func bidirectional(cl proto.StreamerClient) {
 	}
 }
 
-func serverStream(cl proto.StreamerClient) {
+func serverStream(cl proto.StreamerService) {
 	// send request to stream count of 10
 	stream, err := cl.ServerStream(context.Background(), &proto.Request{Count: int64(10)})
 	if err != nil {
@@ -67,7 +67,7 @@ func main() {
 	service.Init()
 
 	// create client
-	cl := proto.NewStreamerClient("go.micro.srv.stream", service.Client())
+	cl := proto.StreamerServiceClient("go.micro.srv.stream", service.Client())
 
 	// bidirectional stream
 	bidirectional(cl)

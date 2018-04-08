@@ -18,9 +18,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -41,39 +41,39 @@ var _ server.Option
 
 // Client API for Streamer service
 
-type StreamerClient interface {
-	Stream(ctx context.Context, opts ...client.CallOption) (Streamer_StreamClient, error)
-	ServerStream(ctx context.Context, in *Request, opts ...client.CallOption) (Streamer_ServerStreamClient, error)
+type StreamerService interface {
+	Stream(ctx context.Context, opts ...client.CallOption) (Streamer_StreamService, error)
+	ServerStream(ctx context.Context, in *Request, opts ...client.CallOption) (Streamer_ServerStreamService, error)
 }
 
-type streamerClient struct {
+type streamerService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewStreamerClient(serviceName string, c client.Client) StreamerClient {
+func StreamerServiceClient(serviceName string, c client.Client) StreamerService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "streamer"
 	}
-	return &streamerClient{
+	return &streamerService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *streamerClient) Stream(ctx context.Context, opts ...client.CallOption) (Streamer_StreamClient, error) {
+func (c *streamerService) Stream(ctx context.Context, opts ...client.CallOption) (Streamer_StreamService, error) {
 	req := c.c.NewRequest(c.serviceName, "Streamer.Stream", &Request{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return &streamerStreamClient{stream}, nil
+	return &streamerStreamService{stream}, nil
 }
 
-type Streamer_StreamClient interface {
+type Streamer_StreamService interface {
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
@@ -81,27 +81,27 @@ type Streamer_StreamClient interface {
 	Recv() (*Response, error)
 }
 
-type streamerStreamClient struct {
+type streamerStreamService struct {
 	stream client.Streamer
 }
 
-func (x *streamerStreamClient) Close() error {
+func (x *streamerStreamService) Close() error {
 	return x.stream.Close()
 }
 
-func (x *streamerStreamClient) SendMsg(m interface{}) error {
+func (x *streamerStreamService) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *streamerStreamClient) RecvMsg(m interface{}) error {
+func (x *streamerStreamService) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *streamerStreamClient) Send(m *Request) error {
+func (x *streamerStreamService) Send(m *Request) error {
 	return x.stream.Send(m)
 }
 
-func (x *streamerStreamClient) Recv() (*Response, error) {
+func (x *streamerStreamService) Recv() (*Response, error) {
 	m := new(Response)
 	err := x.stream.Recv(m)
 	if err != nil {
@@ -110,7 +110,7 @@ func (x *streamerStreamClient) Recv() (*Response, error) {
 	return m, nil
 }
 
-func (c *streamerClient) ServerStream(ctx context.Context, in *Request, opts ...client.CallOption) (Streamer_ServerStreamClient, error) {
+func (c *streamerService) ServerStream(ctx context.Context, in *Request, opts ...client.CallOption) (Streamer_ServerStreamService, error) {
 	req := c.c.NewRequest(c.serviceName, "Streamer.ServerStream", &Request{})
 	stream, err := c.c.Stream(ctx, req, opts...)
 	if err != nil {
@@ -119,33 +119,33 @@ func (c *streamerClient) ServerStream(ctx context.Context, in *Request, opts ...
 	if err := stream.Send(in); err != nil {
 		return nil, err
 	}
-	return &streamerServerStreamClient{stream}, nil
+	return &streamerServerStreamService{stream}, nil
 }
 
-type Streamer_ServerStreamClient interface {
+type Streamer_ServerStreamService interface {
 	SendMsg(interface{}) error
 	RecvMsg(interface{}) error
 	Close() error
 	Recv() (*Response, error)
 }
 
-type streamerServerStreamClient struct {
+type streamerServerStreamService struct {
 	stream client.Streamer
 }
 
-func (x *streamerServerStreamClient) Close() error {
+func (x *streamerServerStreamService) Close() error {
 	return x.stream.Close()
 }
 
-func (x *streamerServerStreamClient) SendMsg(m interface{}) error {
+func (x *streamerServerStreamService) SendMsg(m interface{}) error {
 	return x.stream.Send(m)
 }
 
-func (x *streamerServerStreamClient) RecvMsg(m interface{}) error {
+func (x *streamerServerStreamService) RecvMsg(m interface{}) error {
 	return x.stream.Recv(m)
 }
 
-func (x *streamerServerStreamClient) Recv() (*Response, error) {
+func (x *streamerServerStreamService) Recv() (*Response, error) {
 	m := new(Response)
 	err := x.stream.Recv(m)
 	if err != nil {

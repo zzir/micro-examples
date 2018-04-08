@@ -15,7 +15,7 @@ import (
 type Say struct{}
 
 var (
-	cl hello.SayClient
+	cl hello.SayService
 )
 
 func (s *Say) Anything(req *restful.Request, rsp *restful.Response) {
@@ -50,7 +50,7 @@ func main() {
 	service.Init()
 
 	// setup Greeter Server Client
-	cl = hello.NewSayClient("go.micro.srv.greeter", client.DefaultClient)
+	cl = hello.SayServiceClient("go.micro.srv.greeter", client.DefaultClient)
 
 	// Create RESTful handler
 	say := new(Say)

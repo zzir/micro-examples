@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/micro/go-micro"
 	"context"
+	"github.com/micro/go-micro"
 )
 
 func main() {

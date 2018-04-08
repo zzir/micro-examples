@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/micro/go-log"
-	"github.com/micro/go-micro"
 	"github.com/micro/examples/template/fnc/handler"
 	"github.com/micro/examples/template/fnc/subscriber"
+	"github.com/micro/go-log"
+	"github.com/micro/go-micro"
 )
 
 func main() {

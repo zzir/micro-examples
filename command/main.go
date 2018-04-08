@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/micro/go-micro"
 	"context"
+	"github.com/micro/go-micro"
 
 	proto "github.com/micro/go-bot/proto"
 )

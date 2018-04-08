@@ -21,9 +21,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -44,29 +44,29 @@ var _ server.Option
 
 // Client API for Profile service
 
-type ProfileClient interface {
+type ProfileService interface {
 	GetProfiles(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error)
 }
 
-type profileClient struct {
+type profileService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewProfileClient(serviceName string, c client.Client) ProfileClient {
+func ProfileServiceClient(serviceName string, c client.Client) ProfileService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "profile"
 	}
-	return &profileClient{
+	return &profileService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *profileClient) GetProfiles(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
+func (c *profileService) GetProfiles(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
 	req := c.c.NewRequest(c.serviceName, "Profile.GetProfiles", in)
 	out := new(Result)
 	err := c.c.Call(ctx, req, out, opts...)

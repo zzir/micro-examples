@@ -17,15 +17,16 @@ import math "math"
 import go_api "github.com/micro/go-api/proto"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+var _ = go_api.Response{}
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the proto package it is being compiled against.
@@ -40,29 +41,29 @@ var _ server.Option
 
 // Client API for Example service
 
-type ExampleClient interface {
+type ExampleService interface {
 	Call(ctx context.Context, in *go_api.Request, opts ...client.CallOption) (*go_api.Response, error)
 }
 
-type exampleClient struct {
+type exampleService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewExampleClient(serviceName string, c client.Client) ExampleClient {
+func ExampleServiceClient(serviceName string, c client.Client) ExampleService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "example"
 	}
-	return &exampleClient{
+	return &exampleService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *exampleClient) Call(ctx context.Context, in *go_api.Request, opts ...client.CallOption) (*go_api.Response, error) {
+func (c *exampleService) Call(ctx context.Context, in *go_api.Request, opts ...client.CallOption) (*go_api.Response, error) {
 	req := c.c.NewRequest(c.serviceName, "Example.Call", in)
 	out := new(go_api.Response)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -92,29 +93,29 @@ func (h *Example) Call(ctx context.Context, in *go_api.Request, out *go_api.Resp
 
 // Client API for Foo service
 
-type FooClient interface {
+type FooService interface {
 	Bar(ctx context.Context, in *go_api.Request, opts ...client.CallOption) (*go_api.Response, error)
 }
 
-type fooClient struct {
+type fooService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewFooClient(serviceName string, c client.Client) FooClient {
+func FooServiceClient(serviceName string, c client.Client) FooService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "foo"
 	}
-	return &fooClient{
+	return &fooService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *fooClient) Bar(ctx context.Context, in *go_api.Request, opts ...client.CallOption) (*go_api.Response, error) {
+func (c *fooService) Bar(ctx context.Context, in *go_api.Request, opts ...client.CallOption) (*go_api.Response, error) {
 	req := c.c.NewRequest(c.serviceName, "Foo.Bar", in)
 	out := new(go_api.Response)
 	err := c.c.Call(ctx, req, out, opts...)

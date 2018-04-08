@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 
+	"context"
 	example "github.com/micro/examples/server/proto/example"
 	"github.com/micro/go-micro/cmd"
-	"context"
 )
 
 var (
-	cl = example.NewExampleClient("go.micro.srv.example", nil)
+	cl = example.ExampleServiceClient("go.micro.srv.example", nil)
 )
 
 func call(i int) {

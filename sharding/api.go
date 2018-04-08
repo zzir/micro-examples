@@ -15,7 +15,7 @@ import (
 )
 
 type Say struct {
-	Client hello.SayClient
+	Client hello.SayService
 }
 
 func (s *Say) Hello(ctx context.Context, req *api.Request, rsp *api.Response) error {
@@ -53,11 +53,9 @@ func main() {
 	// parse command line flags
 	service.Init()
 
-	service.Server().Handle(
-		service.Server().NewHandler(
-			&Say{Client: hello.NewSayClient("go.micro.srv.greeter", service.Client())},
-		),
-	)
+	service.Server().Handle(service.Server().NewHandler(&Say{
+		Client: hello.SayServiceClient("go.micro.srv.greeter", service.Client()),
+	}))
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)

@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"os"
 
+	"context"
 	"github.com/micro/cli"
 	proto "github.com/micro/examples/service/proto"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/server"
-	"context"
 )
 
 /*
@@ -54,7 +54,7 @@ func (g *Greeter) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto
 // Setup and the client
 func runClient(service micro.Service) {
 	// Create new greeter client
-	greeter := proto.NewGreeterClient("greeter", service.Client())
+	greeter := proto.GreeterServiceClient("greeter", service.Client())
 
 	// Call the greeter
 	rsp, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "John"})

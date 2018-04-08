@@ -17,6 +17,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -63,6 +68,170 @@ func (m *Response) GetCount() int64 {
 func init() {
 	proto.RegisterType((*Request)(nil), "Request")
 	proto.RegisterType((*Response)(nil), "Response")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Streamer service
+
+type StreamerClient interface {
+	Stream(ctx context.Context, opts ...grpc.CallOption) (Streamer_StreamClient, error)
+	ServerStream(ctx context.Context, in *Request, opts ...grpc.CallOption) (Streamer_ServerStreamClient, error)
+}
+
+type streamerClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewStreamerClient(cc *grpc.ClientConn) StreamerClient {
+	return &streamerClient{cc}
+}
+
+func (c *streamerClient) Stream(ctx context.Context, opts ...grpc.CallOption) (Streamer_StreamClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Streamer_serviceDesc.Streams[0], c.cc, "/Streamer/Stream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &streamerStreamClient{stream}
+	return x, nil
+}
+
+type Streamer_StreamClient interface {
+	Send(*Request) error
+	Recv() (*Response, error)
+	grpc.ClientStream
+}
+
+type streamerStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *streamerStreamClient) Send(m *Request) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *streamerStreamClient) Recv() (*Response, error) {
+	m := new(Response)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *streamerClient) ServerStream(ctx context.Context, in *Request, opts ...grpc.CallOption) (Streamer_ServerStreamClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Streamer_serviceDesc.Streams[1], c.cc, "/Streamer/ServerStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &streamerServerStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Streamer_ServerStreamClient interface {
+	Recv() (*Response, error)
+	grpc.ClientStream
+}
+
+type streamerServerStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *streamerServerStreamClient) Recv() (*Response, error) {
+	m := new(Response)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// Server API for Streamer service
+
+type StreamerServer interface {
+	Stream(Streamer_StreamServer) error
+	ServerStream(*Request, Streamer_ServerStreamServer) error
+}
+
+func RegisterStreamerServer(s *grpc.Server, srv StreamerServer) {
+	s.RegisterService(&_Streamer_serviceDesc, srv)
+}
+
+func _Streamer_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(StreamerServer).Stream(&streamerStreamServer{stream})
+}
+
+type Streamer_StreamServer interface {
+	Send(*Response) error
+	Recv() (*Request, error)
+	grpc.ServerStream
+}
+
+type streamerStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *streamerStreamServer) Send(m *Response) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *streamerStreamServer) Recv() (*Request, error) {
+	m := new(Request)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _Streamer_ServerStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Request)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(StreamerServer).ServerStream(m, &streamerServerStreamServer{stream})
+}
+
+type Streamer_ServerStreamServer interface {
+	Send(*Response) error
+	grpc.ServerStream
+}
+
+type streamerServerStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *streamerServerStreamServer) Send(m *Response) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+var _Streamer_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "Streamer",
+	HandlerType: (*StreamerServer)(nil),
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Stream",
+			Handler:       _Streamer_Stream_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "ServerStream",
+			Handler:       _Streamer_ServerStream_Handler,
+			ServerStreams: true,
+		},
+	},
+	Metadata: "github.com/micro/examples/stream/server/proto/stream.proto",
 }
 
 func init() {

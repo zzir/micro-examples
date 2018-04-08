@@ -22,6 +22,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -153,6 +158,204 @@ func init() {
 	proto.RegisterType((*StreamingResponse)(nil), "go.micro.srv.template.StreamingResponse")
 	proto.RegisterType((*Ping)(nil), "go.micro.srv.template.Ping")
 	proto.RegisterType((*Pong)(nil), "go.micro.srv.template.Pong")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Example service
+
+type ExampleClient interface {
+	Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Stream(ctx context.Context, in *StreamingRequest, opts ...grpc.CallOption) (Example_StreamClient, error)
+	PingPong(ctx context.Context, opts ...grpc.CallOption) (Example_PingPongClient, error)
+}
+
+type exampleClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewExampleClient(cc *grpc.ClientConn) ExampleClient {
+	return &exampleClient{cc}
+}
+
+func (c *exampleClient) Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := grpc.Invoke(ctx, "/go.micro.srv.template.Example/Call", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *exampleClient) Stream(ctx context.Context, in *StreamingRequest, opts ...grpc.CallOption) (Example_StreamClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Example_serviceDesc.Streams[0], c.cc, "/go.micro.srv.template.Example/Stream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &exampleStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Example_StreamClient interface {
+	Recv() (*StreamingResponse, error)
+	grpc.ClientStream
+}
+
+type exampleStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *exampleStreamClient) Recv() (*StreamingResponse, error) {
+	m := new(StreamingResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *exampleClient) PingPong(ctx context.Context, opts ...grpc.CallOption) (Example_PingPongClient, error) {
+	stream, err := grpc.NewClientStream(ctx, &_Example_serviceDesc.Streams[1], c.cc, "/go.micro.srv.template.Example/PingPong", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &examplePingPongClient{stream}
+	return x, nil
+}
+
+type Example_PingPongClient interface {
+	Send(*Ping) error
+	Recv() (*Pong, error)
+	grpc.ClientStream
+}
+
+type examplePingPongClient struct {
+	grpc.ClientStream
+}
+
+func (x *examplePingPongClient) Send(m *Ping) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *examplePingPongClient) Recv() (*Pong, error) {
+	m := new(Pong)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+// Server API for Example service
+
+type ExampleServer interface {
+	Call(context.Context, *Request) (*Response, error)
+	Stream(*StreamingRequest, Example_StreamServer) error
+	PingPong(Example_PingPongServer) error
+}
+
+func RegisterExampleServer(s *grpc.Server, srv ExampleServer) {
+	s.RegisterService(&_Example_serviceDesc, srv)
+}
+
+func _Example_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExampleServer).Call(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/go.micro.srv.template.Example/Call",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExampleServer).Call(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Example_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamingRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ExampleServer).Stream(m, &exampleStreamServer{stream})
+}
+
+type Example_StreamServer interface {
+	Send(*StreamingResponse) error
+	grpc.ServerStream
+}
+
+type exampleStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *exampleStreamServer) Send(m *StreamingResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Example_PingPong_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(ExampleServer).PingPong(&examplePingPongServer{stream})
+}
+
+type Example_PingPongServer interface {
+	Send(*Pong) error
+	Recv() (*Ping, error)
+	grpc.ServerStream
+}
+
+type examplePingPongServer struct {
+	grpc.ServerStream
+}
+
+func (x *examplePingPongServer) Send(m *Pong) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *examplePingPongServer) Recv() (*Ping, error) {
+	m := new(Ping)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+var _Example_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "go.micro.srv.template.Example",
+	HandlerType: (*ExampleServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Call",
+			Handler:    _Example_Call_Handler,
+		},
+	},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Stream",
+			Handler:       _Example_Stream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "PingPong",
+			Handler:       _Example_PingPong_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
+	Metadata: "github.com/micro/examples/template/srv/proto/example/example.proto",
 }
 
 func init() {

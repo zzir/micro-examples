@@ -20,9 +20,9 @@ import _ "github.com/micro/examples/booking/srv/profile/proto"
 import _ "github.com/micro/examples/booking/srv/rate/proto"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -43,29 +43,29 @@ var _ server.Option
 
 // Client API for Hotel service
 
-type HotelClient interface {
+type HotelService interface {
 	Rates(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
-type hotelClient struct {
+type hotelService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewHotelClient(serviceName string, c client.Client) HotelClient {
+func HotelServiceClient(serviceName string, c client.Client) HotelService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "hotel"
 	}
-	return &hotelClient{
+	return &hotelService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *hotelClient) Rates(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+func (c *hotelService) Rates(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
 	req := c.c.NewRequest(c.serviceName, "Hotel.Rates", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)

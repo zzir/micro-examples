@@ -20,6 +20,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -213,6 +218,78 @@ func init() {
 	proto.RegisterType((*Hotel)(nil), "profile.Hotel")
 	proto.RegisterType((*Address)(nil), "profile.Address")
 	proto.RegisterType((*Image)(nil), "profile.Image")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Profile service
+
+type ProfileClient interface {
+	GetProfiles(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Result, error)
+}
+
+type profileClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewProfileClient(cc *grpc.ClientConn) ProfileClient {
+	return &profileClient{cc}
+}
+
+func (c *profileClient) GetProfiles(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Result, error) {
+	out := new(Result)
+	err := grpc.Invoke(ctx, "/profile.Profile/GetProfiles", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Profile service
+
+type ProfileServer interface {
+	GetProfiles(context.Context, *Request) (*Result, error)
+}
+
+func RegisterProfileServer(s *grpc.Server, srv ProfileServer) {
+	s.RegisterService(&_Profile_serviceDesc, srv)
+}
+
+func _Profile_GetProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServer).GetProfiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/profile.Profile/GetProfiles",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServer).GetProfiles(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Profile_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "profile.Profile",
+	HandlerType: (*ProfileServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetProfiles",
+			Handler:    _Profile_GetProfiles_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/booking/srv/profile/proto/profile.proto",
 }
 
 func init() {

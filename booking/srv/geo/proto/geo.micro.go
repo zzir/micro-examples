@@ -18,9 +18,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -41,30 +41,30 @@ var _ server.Option
 
 // Client API for Geo service
 
-type GeoClient interface {
+type GeoService interface {
 	// Finds the hotels contained nearby the current lat/lon.
 	Nearby(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error)
 }
 
-type geoClient struct {
+type geoService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewGeoClient(serviceName string, c client.Client) GeoClient {
+func GeoServiceClient(serviceName string, c client.Client) GeoService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "geo"
 	}
-	return &geoClient{
+	return &geoService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *geoClient) Nearby(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
+func (c *geoService) Nearby(ctx context.Context, in *Request, opts ...client.CallOption) (*Result, error) {
 	req := c.c.NewRequest(c.serviceName, "Geo.Nearby", in)
 	out := new(Result)
 	err := c.c.Call(ctx, req, out, opts...)

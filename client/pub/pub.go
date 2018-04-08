@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
+	"context"
 	example "github.com/micro/examples/server/proto/example"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
 	"github.com/micro/go-micro/metadata"
-	"context"
 )
 
 // publishes a message

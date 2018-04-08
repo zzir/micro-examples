@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
+	"context"
 	proto "github.com/micro/examples/service/proto"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
-	"context"
 )
 
 // log wrapper logs every time a request is made
@@ -33,7 +33,7 @@ func main() {
 
 	service.Init()
 
-	greeter := proto.NewGreeterClient("greeter", service.Client())
+	greeter := proto.GreeterServiceClient("greeter", service.Client())
 
 	rsp, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "John"})
 	if err != nil {

@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/micro/go-log"
 
-	"github.com/micro/go-micro"
-	"github.com/micro/examples/template/api/handler"
 	"github.com/micro/examples/template/api/client"
+	"github.com/micro/examples/template/api/handler"
+	"github.com/micro/go-micro"
 
 	example "github.com/micro/examples/template/api/proto/example"
 )

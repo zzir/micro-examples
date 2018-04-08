@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
+	"context"
 	example "github.com/micro/examples/server/proto/example"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
 	"github.com/micro/go-micro/metadata"
-	"context"
 )
 
 // wrapper example code

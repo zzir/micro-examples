@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
+	"context"
 	proto "github.com/micro/examples/pubsub/srv/proto"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 	"github.com/pborman/uuid"
-	"context"
 )
 
 // send events using the publisher

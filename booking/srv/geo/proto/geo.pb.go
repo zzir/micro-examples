@@ -17,6 +17,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -72,6 +77,80 @@ func (m *Result) GetHotelIds() []string {
 func init() {
 	proto.RegisterType((*Request)(nil), "geo.Request")
 	proto.RegisterType((*Result)(nil), "geo.Result")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Geo service
+
+type GeoClient interface {
+	// Finds the hotels contained nearby the current lat/lon.
+	Nearby(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Result, error)
+}
+
+type geoClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewGeoClient(cc *grpc.ClientConn) GeoClient {
+	return &geoClient{cc}
+}
+
+func (c *geoClient) Nearby(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Result, error) {
+	out := new(Result)
+	err := grpc.Invoke(ctx, "/geo.Geo/Nearby", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Geo service
+
+type GeoServer interface {
+	// Finds the hotels contained nearby the current lat/lon.
+	Nearby(context.Context, *Request) (*Result, error)
+}
+
+func RegisterGeoServer(s *grpc.Server, srv GeoServer) {
+	s.RegisterService(&_Geo_serviceDesc, srv)
+}
+
+func _Geo_Nearby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GeoServer).Nearby(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/geo.Geo/Nearby",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GeoServer).Nearby(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Geo_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "geo.Geo",
+	HandlerType: (*GeoServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Nearby",
+			Handler:    _Geo_Nearby_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/booking/srv/geo/proto/geo.proto",
 }
 
 func init() {

@@ -14,7 +14,12 @@ package api
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/micro/go-api/proto"
+import go_api "github.com/micro/go-api/proto"
+
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -26,6 +31,115 @@ var _ = math.Inf
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Form service
+
+type FormClient interface {
+	// regular form
+	Submit(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error)
+	// multipart form
+	Multipart(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error)
+}
+
+type formClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewFormClient(cc *grpc.ClientConn) FormClient {
+	return &formClient{cc}
+}
+
+func (c *formClient) Submit(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error) {
+	out := new(go_api.Response)
+	err := grpc.Invoke(ctx, "/Form/Submit", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *formClient) Multipart(ctx context.Context, in *go_api.Request, opts ...grpc.CallOption) (*go_api.Response, error) {
+	out := new(go_api.Response)
+	err := grpc.Invoke(ctx, "/Form/Multipart", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Form service
+
+type FormServer interface {
+	// regular form
+	Submit(context.Context, *go_api.Request) (*go_api.Response, error)
+	// multipart form
+	Multipart(context.Context, *go_api.Request) (*go_api.Response, error)
+}
+
+func RegisterFormServer(s *grpc.Server, srv FormServer) {
+	s.RegisterService(&_Form_serviceDesc, srv)
+}
+
+func _Form_Submit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(go_api.Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormServer).Submit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Form/Submit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormServer).Submit(ctx, req.(*go_api.Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Form_Multipart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(go_api.Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormServer).Multipart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Form/Multipart",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormServer).Multipart(ctx, req.(*go_api.Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Form_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "Form",
+	HandlerType: (*FormServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Submit",
+			Handler:    _Form_Submit_Handler,
+		},
+		{
+			MethodName: "Multipart",
+			Handler:    _Form_Multipart_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/examples/form/api/proto/api.proto",
+}
 
 func init() { proto.RegisterFile("github.com/micro/examples/form/api/proto/api.proto", fileDescriptor0) }
 

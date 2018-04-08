@@ -3,8 +3,8 @@ package subscriber
 import (
 	"github.com/micro/go-log"
 
-	example "github.com/micro/examples/template/srv/proto/example"
 	"context"
+	example "github.com/micro/examples/template/srv/proto/example"
 )
 
 type Example struct{}

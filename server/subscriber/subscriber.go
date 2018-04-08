@@ -3,8 +3,8 @@ package subscriber
 import (
 	"log"
 
-	example "github.com/micro/examples/server/proto/example"
 	"context"
+	example "github.com/micro/examples/server/proto/example"
 )
 
 type Example struct{}

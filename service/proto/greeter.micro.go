@@ -18,9 +18,9 @@ import fmt "fmt"
 import math "math"
 
 import (
+	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
-	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -41,29 +41,29 @@ var _ server.Option
 
 // Client API for Greeter service
 
-type GreeterClient interface {
+type GreeterService interface {
 	Hello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error)
 }
 
-type greeterClient struct {
+type greeterService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewGreeterClient(serviceName string, c client.Client) GreeterClient {
+func GreeterServiceClient(serviceName string, c client.Client) GreeterService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "greeter"
 	}
-	return &greeterClient{
+	return &greeterService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *greeterClient) Hello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error) {
+func (c *greeterService) Hello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error) {
 	req := c.c.NewRequest(c.serviceName, "Greeter.Hello", in)
 	out := new(HelloResponse)
 	err := c.c.Call(ctx, req, out, opts...)

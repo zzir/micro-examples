@@ -15,7 +15,7 @@ func main() {
 	service.Init()
 
 	// use the generated client stub
-	cl := hello.NewSayClient("go.micro.srv.greeter", service.Client())
+	cl := hello.SayServiceClient("go.micro.srv.greeter", service.Client())
 
 	// Set arbitrary headers in context
 	ctx := metadata.NewContext(context.Background(), map[string]string{
