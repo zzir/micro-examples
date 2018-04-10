@@ -36,22 +36,6 @@ This is a repository for micro examples. Feel free to contribute.
 - [waitgroup](waitgroup) - Demonstrates how to use a waitgroup with a service
 - [wrapper](wrapper) - A simple example of using a log wrapper
 
-## External
-
-- [auth-srv](https://github.com/micro/auth-srv) - An Oauth2 authentication service
-- [geo-srv](https://github.com/micro/geo-srv) - Geolocation tracking service using hailocab/go-geoindex
-- [geo-web](https://github.com/micro/geo-web) - Web demo for the geo srv
-- [geo-api](https://github.com/micro/geo-api) - API for the geo srv
-- [discovery-srv](https://github.com/micro/discovery-srv) - A discovery in the micro platform
-- [geocode-srv](https://github.com/micro/geocode-srv) - A geocoding service using the Google Geocoding API
-- [hailo-srv](https://github.com/micro/hailo-srv) - A service for the hailo taxi service developer api
-- [monitor-srv](https://github.com/micro/monitor-srv) - A monitoring service for Micro services
-- [place-srv](https://github.com/micro/place-srv) - A microservice to store and retrieve places (includes Google Place Search API)
-- [slack-srv](https://github.com/micro/slack-srv) - The slack bot API as a go-micro RPC service
-- [trace-srv](https://github.com/micro/trace-srv) - A distributed tracing microservice in the realm of dapper, zipkin, etc
-- [twitter-srv](https://github.com/micro/twitter-srv) - A microservice for the twitter API
-- [user-srv](https://github.com/micro/user-srv)	- A microservice for user management and authentication
-
 ## Community
 
 Find contributions from the community via the [explorer](https://micro.mu/explore/)
