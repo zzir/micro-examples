@@ -14,7 +14,7 @@ Where the `GreeterService` is used we can instead pass in the mock which returns
 
 ## Mock Client
 
-```
+```go
 type mockGreeterService struct {
 }
 
@@ -33,7 +33,7 @@ func GreeterServiceClient() proto.GreeterService {
 
 In the test environment we will use the mock client
 
-```
+```go
 func main() {
 	var c proto.GreeterService
 
