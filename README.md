@@ -18,6 +18,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [heartbeat](heartbeat) - Make services heartbeat with discovery for high availability
 - [helloworld](helloworld) - Hello world using micro
 - [metadata](metadata) - Extracting metadata from context of a request
+- [mocking](mocking) - Demonstrate mocking helloworld service
 - [noproto](noproto) - Use micro without protobuf or code generation, only go types
 - [options](options) - Setting options in the go-micro framework
 - [plugins](plugins) - How to use plugins
