@@ -23,7 +23,6 @@ This is a repository for micro examples. Feel free to contribute.
 - [options](options) - Setting options in the go-micro framework
 - [plugins](plugins) - How to use plugins
 - [pubsub](pubsub) - Example of using pubsub at the client/server level
-- [proxy](proxy) - Greeter service using the micro proxy as a sidecar in multiple languages
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 - [redirect](redirect) - An example of how to http redirect using an API service
 - [roundrobin](roundrobin) - A stateful client wrapper for true round robin of requests
@@ -45,11 +44,14 @@ Find contributions from the community via the [explorer](https://micro.mu/explor
 
 ## Dependencies
 
-### Service Discovery
+- [Service Discovery](#service-discovery)
+- [Protobuf](#protobuf)
+
+## Service Discovery
 
 All services require service discovery. The default is Consul or MDNS.
 
-#### Consul
+### Consul
 
 Install
 ```
@@ -61,17 +63,17 @@ Run
 consul agent -dev
 ```
 
-#### Multicast DNS
+### Multicast DNS
 
 Use flag `--registry=mdns` for a zero dependency configuration
 
-### Protobuf
+## Protobuf
 
 Protobuf is used for code generation of message types and client/hander stubs.
 
 If making changes recompile the protos.
 
-#### Install
+### Install
 
 Install [protoc](https://github.com/google/protobuf) for your environment. Then:
 
@@ -83,7 +85,7 @@ go get github.com/golang/protobuf/{proto,protoc-gen-go}
 go get github.com/micro/protoc-gen-micro
 ```
 
-#### Compile Proto
+### Compile Proto
 
 ```shell
 protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. path/to/proto
