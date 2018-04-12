@@ -23,6 +23,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [options](options) - Setting options in the go-micro framework
 - [plugins](plugins) - How to use plugins
 - [pubsub](pubsub) - Example of using pubsub at the client/server level
+- [proxy](proxy) - Greeter service using the micro proxy as a sidecar in multiple languages
 - [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
 - [redirect](redirect) - An example of how to http redirect using an API service
 - [roundrobin](roundrobin) - A stateful client wrapper for true round robin of requests
@@ -31,7 +32,6 @@ This is a repository for micro examples. Feel free to contribute.
 - [service](service) - Example of the top level Service in go-micro.
 - [sharding](sharding) - An example of how to shard requests or use session affinity
 - [shutdown](shutdown) - Demonstrates graceful shutdown via context cancellation
-- [sidecar](sidecar) - Greeter service using the micro api as a sidecar in multiple languages
 - [stream](stream) - An example of a streaming service and client
 - [template](template) - Api, web and srv service templates generated with the 'micro new' command
 - [waitgroup](waitgroup) - Demonstrates how to use a waitgroup with a service
