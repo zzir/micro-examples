@@ -1,9 +1,9 @@
 package subscriber
 
 import (
+	"context"
 	"github.com/micro/go-log"
 
-	"context"
 	example "github.com/micro/examples/template/srv/proto/example"
 )
 
