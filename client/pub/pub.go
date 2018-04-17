@@ -5,25 +5,16 @@ import (
 
 	"context"
 	example "github.com/micro/examples/server/proto/example"
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/cmd"
-	"github.com/micro/go-micro/metadata"
+	"github.com/micro/go-micro"
 )
 
 // publishes a message
-func pub(i int) {
-	msg := client.NewPublication("topic.go.micro.srv.example", &example.Message{
-		Say: fmt.Sprintf("This is a publication %d", i),
-	})
+func pub(i int, p micro.Publisher) {
+	msg := &example.Message{
+		Say: fmt.Sprintf("This is an async message %d", i),
+	}
 
-	// create context with metadata
-	ctx := metadata.NewContext(context.Background(), map[string]string{
-		"X-User-Id": "john",
-		"X-From-Id": "script",
-	})
-
-	// publish message
-	if err := client.Publish(ctx, msg); err != nil {
+	if err := p.Publish(context.TODO(), msg); err != nil {
 		fmt.Println("pub err: ", err)
 		return
 	}
@@ -32,9 +23,14 @@ func pub(i int) {
 }
 
 func main() {
-	cmd.Init()
+	service := micro.NewService()
+	service.Init()
+
+	p := micro.NewPublisher("example", service.Client())
+
 	fmt.Println("\n--- Publisher example ---")
+
 	for i := 0; i < 10; i++ {
-		pub(i)
+		pub(i, p)
 	}
 }

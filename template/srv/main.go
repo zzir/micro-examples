@@ -5,15 +5,19 @@ import (
 	"github.com/micro/examples/template/srv/subscriber"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
+	"github.com/micro/go-plugins/registry/etcdv3"
 
 	example "github.com/micro/examples/template/srv/proto/example"
 )
 
 func main() {
+	r := etcdv3.NewRegistry()
+
 	// New Service
 	service := micro.NewService(
 		micro.Name("go.micro.srv.template"),
 		micro.Version("latest"),
+		micro.Registry(r),
 	)
 
 	// Register Handler

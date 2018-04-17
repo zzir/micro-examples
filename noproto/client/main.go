@@ -5,17 +5,18 @@ import (
 	"fmt"
 
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/client"
 )
 
 func main() {
 	service := micro.NewService()
 	service.Init()
-	client := service.Client()
+	c := service.Client()
 
-	request := client.NewJsonRequest("greeter", "Greeter.Hello", "john")
+	request := c.NewRequest("greeter", "Greeter.Hello", "john", client.WithContentType("application/json"))
 	var response string
 
-	if err := client.Call(context.TODO(), request, &response); err != nil {
+	if err := c.Call(context.TODO(), request, &response); err != nil {
 		fmt.Println(err)
 		return
 	}

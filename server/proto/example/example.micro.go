@@ -100,7 +100,7 @@ type Example_StreamService interface {
 }
 
 type exampleStreamService struct {
-	stream client.Streamer
+	stream client.Stream
 }
 
 func (x *exampleStreamService) Close() error {
@@ -142,7 +142,7 @@ type Example_PingPongService interface {
 }
 
 type examplePingPongService struct {
-	stream client.Streamer
+	stream client.Stream
 }
 
 func (x *examplePingPongService) Close() error {
@@ -190,7 +190,7 @@ func (h *Example) Call(ctx context.Context, in *Request, out *Response) error {
 	return h.ExampleHandler.Call(ctx, in, out)
 }
 
-func (h *Example) Stream(ctx context.Context, stream server.Streamer) error {
+func (h *Example) Stream(ctx context.Context, stream server.Stream) error {
 	m := new(StreamingRequest)
 	if err := stream.Recv(m); err != nil {
 		return err
@@ -206,7 +206,7 @@ type Example_StreamStream interface {
 }
 
 type exampleStreamStream struct {
-	stream server.Streamer
+	stream server.Stream
 }
 
 func (x *exampleStreamStream) Close() error {
@@ -225,7 +225,7 @@ func (x *exampleStreamStream) Send(m *StreamingResponse) error {
 	return x.stream.Send(m)
 }
 
-func (h *Example) PingPong(ctx context.Context, stream server.Streamer) error {
+func (h *Example) PingPong(ctx context.Context, stream server.Stream) error {
 	return h.ExampleHandler.PingPong(ctx, &examplePingPongStream{stream})
 }
 
@@ -238,7 +238,7 @@ type Example_PingPongStream interface {
 }
 
 type examplePingPongStream struct {
-	stream server.Streamer
+	stream server.Stream
 }
 
 func (x *examplePingPongStream) Close() error {

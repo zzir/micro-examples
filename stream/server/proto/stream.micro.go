@@ -18,9 +18,9 @@ import fmt "fmt"
 import math "math"
 
 import (
-	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
+	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -82,7 +82,7 @@ type Streamer_StreamService interface {
 }
 
 type streamerStreamService struct {
-	stream client.Streamer
+	stream client.Stream
 }
 
 func (x *streamerStreamService) Close() error {
@@ -130,7 +130,7 @@ type Streamer_ServerStreamService interface {
 }
 
 type streamerServerStreamService struct {
-	stream client.Streamer
+	stream client.Stream
 }
 
 func (x *streamerServerStreamService) Close() error {
@@ -169,7 +169,7 @@ type Streamer struct {
 	StreamerHandler
 }
 
-func (h *Streamer) Stream(ctx context.Context, stream server.Streamer) error {
+func (h *Streamer) Stream(ctx context.Context, stream server.Stream) error {
 	return h.StreamerHandler.Stream(ctx, &streamerStreamStream{stream})
 }
 
@@ -182,7 +182,7 @@ type Streamer_StreamStream interface {
 }
 
 type streamerStreamStream struct {
-	stream server.Streamer
+	stream server.Stream
 }
 
 func (x *streamerStreamStream) Close() error {
@@ -209,7 +209,7 @@ func (x *streamerStreamStream) Recv() (*Request, error) {
 	return m, nil
 }
 
-func (h *Streamer) ServerStream(ctx context.Context, stream server.Streamer) error {
+func (h *Streamer) ServerStream(ctx context.Context, stream server.Stream) error {
 	m := new(Request)
 	if err := stream.Recv(m); err != nil {
 		return err
@@ -225,7 +225,7 @@ type Streamer_ServerStreamStream interface {
 }
 
 type streamerServerStreamStream struct {
-	stream server.Streamer
+	stream server.Stream
 }
 
 func (x *streamerServerStreamStream) Close() error {

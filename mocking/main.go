@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/micro/examples/mocking/mock"
-	proto "github.com/micro/examples/helloworld/proto"
-	"github.com/micro/go-micro"
 	"github.com/micro/cli"
+	proto "github.com/micro/examples/helloworld/proto"
+	"github.com/micro/examples/mocking/mock"
+	"github.com/micro/go-micro"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 
 	service := micro.NewService(
 		micro.Flags(cli.StringFlag{
-			Name: "environment",
+			Name:  "environment",
 			Value: "testing",
 		}),
 	)

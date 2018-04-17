@@ -19,7 +19,7 @@ func (e *Example) Call(ctx context.Context, req *example.Request, rsp *example.R
 	return nil
 }
 
-func (e *Example) Stream(ctx context.Context, stream server.Streamer) error {
+func (e *Example) Stream(ctx context.Context, stream server.Stream) error {
 	log.Print("Executing streaming handler")
 	req := &example.StreamingRequest{}
 
@@ -44,7 +44,7 @@ func (e *Example) Stream(ctx context.Context, stream server.Streamer) error {
 	return nil
 }
 
-func (e *Example) PingPong(ctx context.Context, stream server.Streamer) error {
+func (e *Example) PingPong(ctx context.Context, stream server.Stream) error {
 	for {
 		req := &example.Ping{}
 		if err := stream.Recv(req); err != nil {

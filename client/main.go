@@ -5,25 +5,18 @@ import (
 
 	"context"
 	example "github.com/micro/examples/server/proto/example"
+	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/cmd"
 	"github.com/micro/go-micro/metadata"
 )
 
 // publishes a message
-func pub() {
-	msg := client.NewPublication("topic.go.micro.srv.example", &example.Message{
-		Say: "This is a publication",
-	})
+func pub(p micro.Publisher) {
+	msg := &example.Message{
+		Say: "This is an async message",
+	}
 
-	// create context with metadata
-	ctx := metadata.NewContext(context.Background(), map[string]string{
-		"X-User-Id": "john",
-		"X-From-Id": "script",
-	})
-
-	// publish message
-	if err := client.Publish(ctx, msg); err != nil {
+	if err := p.Publish(context.TODO(), msg); err != nil {
 		fmt.Println("pub err: ", err)
 		return
 	}
@@ -31,9 +24,9 @@ func pub() {
 	fmt.Printf("Published: %v\n", msg)
 }
 
-func call(i int) {
+func call(i int, c client.Client) {
 	// Create new request to service go.micro.srv.example, method Example.Call
-	req := client.NewRequest("go.micro.srv.example", "Example.Call", &example.Request{
+	req := c.NewRequest("go.micro.srv.example", "Example.Call", &example.Request{
 		Name: "John",
 	})
 
@@ -46,7 +39,7 @@ func call(i int) {
 	rsp := &example.Response{}
 
 	// Call service
-	if err := client.Call(ctx, req, rsp); err != nil {
+	if err := c.Call(ctx, req, rsp); err != nil {
 		fmt.Println("call err: ", err, rsp)
 		return
 	}
@@ -54,12 +47,12 @@ func call(i int) {
 	fmt.Println("Call:", i, "rsp:", rsp.Msg)
 }
 
-func stream(i int) {
+func stream(i int, c client.Client) {
 	// Create new request to service go.micro.srv.example, method Example.Call
 	// Request can be empty as its actually ignored and merely used to call the handler
-	req := client.NewRequest("go.micro.srv.example", "Example.Stream", &example.StreamingRequest{})
+	req := c.NewRequest("go.micro.srv.example", "Example.Stream", &example.StreamingRequest{})
 
-	stream, err := client.Stream(context.Background(), req)
+	stream, err := c.Stream(context.Background(), req)
 	if err != nil {
 		fmt.Println("err:", err)
 		return
@@ -88,12 +81,12 @@ func stream(i int) {
 	}
 }
 
-func pingPong(i int) {
+func pingPong(i int, c client.Client) {
 	// Create new request to service go.micro.srv.example, method Example.Call
 	// Request can be empty as its actually ignored and merely used to call the handler
-	req := client.NewRequest("go.micro.srv.example", "Example.PingPong", &example.StreamingRequest{})
+	req := c.NewRequest("go.micro.srv.example", "Example.PingPong", &example.StreamingRequest{})
 
-	stream, err := client.Stream(context.Background(), req)
+	stream, err := c.Stream(context.Background(), req)
 	if err != nil {
 		fmt.Println("err:", err)
 		return
@@ -124,20 +117,23 @@ func pingPong(i int) {
 }
 
 func main() {
-	cmd.Init()
+	service := micro.NewService()
+	service.Init()
+
+	p := micro.NewPublisher("example", service.Client())
 
 	fmt.Println("\n--- Publisher example ---")
-	pub()
+	pub(p)
 
 	fmt.Println("\n--- Call example ---")
 	for i := 0; i < 10; i++ {
-		call(i)
+		call(i, service.Client())
 	}
 
 	fmt.Println("\n--- Streamer example ---")
-	stream(10)
+	stream(10, service.Client())
 
 	fmt.Println("\n--- Ping Pong example ---")
-	pingPong(10)
+	pingPong(10, service.Client())
 
 }

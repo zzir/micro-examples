@@ -20,7 +20,7 @@ func logWrapper(fn server.HandlerFunc) server.HandlerFunc {
 }
 
 func logSubWrapper(fn server.SubscriberFunc) server.SubscriberFunc {
-	return func(ctx context.Context, req server.Publication) error {
+	return func(ctx context.Context, req server.Message) error {
 		log.Printf("[Log Sub Wrapper] Before serving publication topic: %v", req.Topic())
 		err := fn(ctx, req)
 		log.Printf("[Log Sub Wrapper] After serving publication")
