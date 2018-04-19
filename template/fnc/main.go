@@ -18,7 +18,7 @@ func main() {
 	function.Handle(new(handler.Example))
 
 	// Register Struct as Subscriber
-	function.Subscribe("topic.go.micro.fnc.template", new(subscriber.Example))
+	function.Subscribe("go.micro.fnc.template", new(subscriber.Example))
 
 	// Initialise function
 	function.Init()

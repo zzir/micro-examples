@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+
 	example "github.com/micro/examples/template/fnc/proto/example"
 )
 
