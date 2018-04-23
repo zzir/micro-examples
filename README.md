@@ -41,6 +41,7 @@ This is a repository for micro examples. Feel free to contribute.
 Find contributions from the community via the [explorer](https://micro.mu/explore/)
 
 - [go-shopping](https://github.com/autodidaddict/go-shopping) - A sample product with a suite of services
+- [shippy](https://github.com/EwanValentine/shippy) - A multi app demo and tutorial
 
 ## Dependencies
 
