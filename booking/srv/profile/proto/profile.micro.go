@@ -53,7 +53,7 @@ type profileService struct {
 	serviceName string
 }
 
-func ProfileServiceClient(serviceName string, c client.Client) ProfileService {
+func NewProfileService(serviceName string, c client.Client) ProfileService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -83,13 +83,20 @@ type ProfileHandler interface {
 }
 
 func RegisterProfileHandler(s server.Server, hdlr ProfileHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Profile{hdlr}, opts...))
+	type profile interface {
+		GetProfiles(ctx context.Context, in *Request, out *Result) error
+	}
+	type Profile struct {
+		profile
+	}
+	h := &profileHandler{hdlr}
+	s.Handle(s.NewHandler(&Profile{h}, opts...))
 }
 
-type Profile struct {
+type profileHandler struct {
 	ProfileHandler
 }
 
-func (h *Profile) GetProfiles(ctx context.Context, in *Request, out *Result) error {
+func (h *profileHandler) GetProfiles(ctx context.Context, in *Request, out *Result) error {
 	return h.ProfileHandler.GetProfiles(ctx, in, out)
 }

@@ -33,7 +33,7 @@ func main() {
 
 	service.Init()
 
-	greeter := proto.GreeterServiceClient("greeter", service.Client())
+	greeter := proto.NewGreeterService("greeter", service.Client())
 
 	rsp, err := greeter.Hello(context.TODO(), &proto.HelloRequest{Name: "John"})
 	if err != nil {

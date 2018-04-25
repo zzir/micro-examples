@@ -76,7 +76,7 @@ func (s *Hotel) Rates(ctx context.Context, req *hotel.Request, rsp *hotel.Respon
 	}
 
 	// verify token w/ auth service
-	authClient := auth.AuthServiceClient("go.micro.srv.auth", s.Client)
+	authClient := auth.NewAuthService("go.micro.srv.auth", s.Client)
 	if _, err = authClient.VerifyToken(ctx, &auth.Request{AuthToken: token}); err != nil {
 		return merr.Unauthorized("api.hotel.rates", "Unauthorized")
 	}
@@ -89,7 +89,7 @@ func (s *Hotel) Rates(ctx context.Context, req *hotel.Request, rsp *hotel.Respon
 
 	// finds nearby hotels
 	// TODO(hw): use lat/lon from request params
-	geoClient := geo.GeoServiceClient("go.micro.srv.geo", s.Client)
+	geoClient := geo.NewGeoService("go.micro.srv.geo", s.Client)
 	nearby, err := geoClient.Nearby(ctx, &geo.Request{
 		Lat: 51.502973,
 		Lon: -0.114723,
@@ -146,7 +146,7 @@ func getToken(md metadata.Metadata) (string, error) {
 }
 
 func getRatePlans(c client.Client, ctx context.Context, hotelIDs []string, inDate string, outDate string) chan rateResults {
-	rateClient := rate.RateServiceClient("go.micro.srv.rate", c)
+	rateClient := rate.NewRateService("go.micro.srv.rate", c)
 	ch := make(chan rateResults, 1)
 
 	go func() {
@@ -162,7 +162,7 @@ func getRatePlans(c client.Client, ctx context.Context, hotelIDs []string, inDat
 }
 
 func getHotelProfiles(c client.Client, ctx context.Context, hotelIDs []string) chan profileResults {
-	profileClient := profile.ProfileServiceClient("go.micro.srv.profile", c)
+	profileClient := profile.NewProfileService("go.micro.srv.profile", c)
 	ch := make(chan profileResults, 1)
 
 	go func() {

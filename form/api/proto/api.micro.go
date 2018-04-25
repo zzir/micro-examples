@@ -53,7 +53,7 @@ type formService struct {
 	serviceName string
 }
 
-func FormServiceClient(serviceName string, c client.Client) FormService {
+func NewFormService(serviceName string, c client.Client) FormService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -96,17 +96,25 @@ type FormHandler interface {
 }
 
 func RegisterFormHandler(s server.Server, hdlr FormHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Form{hdlr}, opts...))
+	type form interface {
+		Submit(ctx context.Context, in *go_api.Request, out *go_api.Response) error
+		Multipart(ctx context.Context, in *go_api.Request, out *go_api.Response) error
+	}
+	type Form struct {
+		form
+	}
+	h := &formHandler{hdlr}
+	s.Handle(s.NewHandler(&Form{h}, opts...))
 }
 
-type Form struct {
+type formHandler struct {
 	FormHandler
 }
 
-func (h *Form) Submit(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
+func (h *formHandler) Submit(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
 	return h.FormHandler.Submit(ctx, in, out)
 }
 
-func (h *Form) Multipart(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
+func (h *formHandler) Multipart(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
 	return h.FormHandler.Multipart(ctx, in, out)
 }

@@ -93,7 +93,7 @@ func main() {
 
 	// New RPC client
 	rpcClient := client.NewClient(client.RequestTimeout(time.Second * 120))
-	cli := proto.StreamerServiceClient("go.micro.srv.stream", rpcClient)
+	cli := proto.NewStreamerService("go.micro.srv.stream", rpcClient)
 
 	// Serve static html/js
 	service.Handle("/", http.FileServer(http.Dir("html")))

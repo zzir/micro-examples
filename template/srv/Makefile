@@ -9,8 +9,8 @@ proto:
 
 build: proto
 
-	go build -o template-srv main.go
-    
+	go build -o template-srv main.go plugin.go
+
 test:
 	go test -v ./... -cover
 

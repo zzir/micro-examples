@@ -14,7 +14,7 @@ func main() {
 	service := micro.NewService()
 	service.Init()
 
-	cl := hello.SayServiceClient("go.micro.srv.greeter", service.Client())
+	cl := hello.NewSayService("go.micro.srv.greeter", service.Client())
 
 	// Set arbitrary headers in context
 	ctx := metadata.NewContext(context.Background(), map[string]string{

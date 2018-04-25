@@ -52,7 +52,7 @@ type hotelService struct {
 	serviceName string
 }
 
-func HotelServiceClient(serviceName string, c client.Client) HotelService {
+func NewHotelService(serviceName string, c client.Client) HotelService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -82,13 +82,20 @@ type HotelHandler interface {
 }
 
 func RegisterHotelHandler(s server.Server, hdlr HotelHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Hotel{hdlr}, opts...))
+	type hotel interface {
+		Rates(ctx context.Context, in *Request, out *Response) error
+	}
+	type Hotel struct {
+		hotel
+	}
+	h := &hotelHandler{hdlr}
+	s.Handle(s.NewHandler(&Hotel{h}, opts...))
 }
 
-type Hotel struct {
+type hotelHandler struct {
 	HotelHandler
 }
 
-func (h *Hotel) Rates(ctx context.Context, in *Request, out *Response) error {
+func (h *hotelHandler) Rates(ctx context.Context, in *Request, out *Response) error {
 	return h.HotelHandler.Rates(ctx, in, out)
 }

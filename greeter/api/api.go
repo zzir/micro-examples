@@ -51,7 +51,7 @@ func main() {
 
 	service.Server().Handle(
 		service.Server().NewHandler(
-			&Say{Client: hello.SayServiceClient("go.micro.srv.greeter", service.Client())},
+			&Say{Client: hello.NewSayService("go.micro.srv.greeter", service.Client())},
 		),
 	)
 

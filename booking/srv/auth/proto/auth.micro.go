@@ -51,7 +51,7 @@ type authService struct {
 	serviceName string
 }
 
-func AuthServiceClient(serviceName string, c client.Client) AuthService {
+func NewAuthService(serviceName string, c client.Client) AuthService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -81,13 +81,20 @@ type AuthHandler interface {
 }
 
 func RegisterAuthHandler(s server.Server, hdlr AuthHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Auth{hdlr}, opts...))
+	type auth interface {
+		VerifyToken(ctx context.Context, in *Request, out *Result) error
+	}
+	type Auth struct {
+		auth
+	}
+	h := &authHandler{hdlr}
+	s.Handle(s.NewHandler(&Auth{h}, opts...))
 }
 
-type Auth struct {
+type authHandler struct {
 	AuthHandler
 }
 
-func (h *Auth) VerifyToken(ctx context.Context, in *Request, out *Result) error {
+func (h *authHandler) VerifyToken(ctx context.Context, in *Request, out *Result) error {
 	return h.AuthHandler.VerifyToken(ctx, in, out)
 }

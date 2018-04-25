@@ -40,7 +40,7 @@ func main() {
 	// Register Handlers
 	proto.RegisterGreeterHandler(service.Server(), &Greeter{
 		// Create Service Client
-		Client: hello.SayServiceClient("go.micro.srv.greeter", service.Client()),
+		Client: hello.NewSayService("go.micro.srv.greeter", service.Client()),
 	})
 
 	// for handler use

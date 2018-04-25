@@ -50,7 +50,7 @@ type exampleService struct {
 	serviceName string
 }
 
-func ExampleServiceClient(serviceName string, c client.Client) ExampleService {
+func NewExampleService(serviceName string, c client.Client) ExampleService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -80,14 +80,21 @@ type ExampleHandler interface {
 }
 
 func RegisterExampleHandler(s server.Server, hdlr ExampleHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Example{hdlr}, opts...))
+	type example interface {
+		Call(ctx context.Context, in *go_api.Request, out *go_api.Response) error
+	}
+	type Example struct {
+		example
+	}
+	h := &exampleHandler{hdlr}
+	s.Handle(s.NewHandler(&Example{h}, opts...))
 }
 
-type Example struct {
+type exampleHandler struct {
 	ExampleHandler
 }
 
-func (h *Example) Call(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
+func (h *exampleHandler) Call(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
 	return h.ExampleHandler.Call(ctx, in, out)
 }
 
@@ -102,7 +109,7 @@ type fooService struct {
 	serviceName string
 }
 
-func FooServiceClient(serviceName string, c client.Client) FooService {
+func NewFooService(serviceName string, c client.Client) FooService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -132,13 +139,20 @@ type FooHandler interface {
 }
 
 func RegisterFooHandler(s server.Server, hdlr FooHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Foo{hdlr}, opts...))
+	type foo interface {
+		Bar(ctx context.Context, in *go_api.Request, out *go_api.Response) error
+	}
+	type Foo struct {
+		foo
+	}
+	h := &fooHandler{hdlr}
+	s.Handle(s.NewHandler(&Foo{h}, opts...))
 }
 
-type Foo struct {
+type fooHandler struct {
 	FooHandler
 }
 
-func (h *Foo) Bar(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
+func (h *fooHandler) Bar(ctx context.Context, in *go_api.Request, out *go_api.Response) error {
 	return h.FooHandler.Bar(ctx, in, out)
 }

@@ -1,37 +1,53 @@
-# Template Fnc
+# Template Function
 
-This is the Template function with fqdn go.micro.fnc.template.
+This is the Template function
+
+Generated with
+
+```
+micro new github.com/micro/examples/template/fnc --namespace=go.micro --alias=template --type=fnc --plugin=registry=etcd
+```
 
 ## Getting Started
 
-### Service Discovery
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Usage](#usage)
 
-Install Consul
-[https://www.consul.io/intro/getting-started/install.html](https://www.consul.io/intro/getting-started/install.html)
+## Configuration
 
-Run Consul
-```
-$ consul agent -dev
-```
-### Micro Toolkit
+- FQDN: go.micro.fnc.template
+- Type: fnc
+- Alias: template
 
-Install Micro
+## Dependencies
 
-```
-go get github.com/micro/micro
-```
-
-### Run Function
+Micro functions depend on service discovery. The default is consul.
 
 ```
-$ micro run -r github.com/micro/examples/template/fnc
+# install consul
+brew install consul
+
+# run consul
+consul agent -dev
 ```
 
-### Building a container
+## Usage
 
-If you would like to build the docker container do the following
+A Makefile is included for convenience
+
+Build the binary
+
 ```
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o template-fnc ./main.go
-docker build -t template-fnc .
+make build
+```
 
+Run the function once
+```
+./template-fnc
+```
+
+Build a docker image
+```
+make docker
 ```

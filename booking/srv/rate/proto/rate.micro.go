@@ -53,7 +53,7 @@ type rateService struct {
 	serviceName string
 }
 
-func RateServiceClient(serviceName string, c client.Client) RateService {
+func NewRateService(serviceName string, c client.Client) RateService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -84,13 +84,20 @@ type RateHandler interface {
 }
 
 func RegisterRateHandler(s server.Server, hdlr RateHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Rate{hdlr}, opts...))
+	type rate interface {
+		GetRates(ctx context.Context, in *Request, out *Result) error
+	}
+	type Rate struct {
+		rate
+	}
+	h := &rateHandler{hdlr}
+	s.Handle(s.NewHandler(&Rate{h}, opts...))
 }
 
-type Rate struct {
+type rateHandler struct {
 	RateHandler
 }
 
-func (h *Rate) GetRates(ctx context.Context, in *Request, out *Result) error {
+func (h *rateHandler) GetRates(ctx context.Context, in *Request, out *Result) error {
 	return h.RateHandler.GetRates(ctx, in, out)
 }

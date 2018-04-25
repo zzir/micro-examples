@@ -49,9 +49,9 @@ func main() {
 			env := ctx.String("environment")
 			// use the mock when in testing environment
 			if env == "testing" {
-				c = mock.GreeterServiceClient()
+				c = mock.NewGreeterService()
 			} else {
-				c = proto.GreeterServiceClient("helloworld", service.Client())
+				c = proto.NewGreeterService("helloworld", service.Client())
 			}
 		}),
 	)

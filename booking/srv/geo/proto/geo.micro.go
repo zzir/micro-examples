@@ -51,7 +51,7 @@ type geoService struct {
 	serviceName string
 }
 
-func GeoServiceClient(serviceName string, c client.Client) GeoService {
+func NewGeoService(serviceName string, c client.Client) GeoService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -82,13 +82,20 @@ type GeoHandler interface {
 }
 
 func RegisterGeoHandler(s server.Server, hdlr GeoHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Geo{hdlr}, opts...))
+	type geo interface {
+		Nearby(ctx context.Context, in *Request, out *Result) error
+	}
+	type Geo struct {
+		geo
+	}
+	h := &geoHandler{hdlr}
+	s.Handle(s.NewHandler(&Geo{h}, opts...))
 }
 
-type Geo struct {
+type geoHandler struct {
 	GeoHandler
 }
 
-func (h *Geo) Nearby(ctx context.Context, in *Request, out *Result) error {
+func (h *geoHandler) Nearby(ctx context.Context, in *Request, out *Result) error {
 	return h.GeoHandler.Nearby(ctx, in, out)
 }

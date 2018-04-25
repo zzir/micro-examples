@@ -67,7 +67,7 @@ func main() {
 	service.Init()
 
 	// create client
-	cl := proto.StreamerServiceClient("go.micro.srv.stream", service.Client())
+	cl := proto.NewStreamerService("go.micro.srv.stream", service.Client())
 
 	// bidirectional stream
 	bidirectional(cl)

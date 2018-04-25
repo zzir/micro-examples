@@ -50,7 +50,7 @@ type greeterService struct {
 	serviceName string
 }
 
-func GreeterServiceClient(serviceName string, c client.Client) GreeterService {
+func NewGreeterService(serviceName string, c client.Client) GreeterService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -80,13 +80,20 @@ type GreeterHandler interface {
 }
 
 func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Greeter{hdlr}, opts...))
+	type greeter interface {
+		Hello(ctx context.Context, in *HelloRequest, out *HelloResponse) error
+	}
+	type Greeter struct {
+		greeter
+	}
+	h := &greeterHandler{hdlr}
+	s.Handle(s.NewHandler(&Greeter{h}, opts...))
 }
 
-type Greeter struct {
+type greeterHandler struct {
 	GreeterHandler
 }
 
-func (h *Greeter) Hello(ctx context.Context, in *HelloRequest, out *HelloResponse) error {
+func (h *greeterHandler) Hello(ctx context.Context, in *HelloRequest, out *HelloResponse) error {
 	return h.GreeterHandler.Hello(ctx, in, out)
 }

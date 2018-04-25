@@ -16,7 +16,7 @@ func main() {
 	service.Init()
 
 	// Use the generated client stub
-	cl := hello.SayServiceClient("go.micro.srv.greeter", service.Client())
+	cl := hello.NewSayService("go.micro.srv.greeter", service.Client())
 
 	// Make request
 	rsp, err := cl.Hello(context.Background(), &hello.Request{

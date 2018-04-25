@@ -57,7 +57,7 @@ type exampleService struct {
 	serviceName string
 }
 
-func ExampleServiceClient(serviceName string, c client.Client) ExampleService {
+func NewExampleService(serviceName string, c client.Client) ExampleService {
 	if c == nil {
 		c = client.NewClient()
 	}
@@ -179,18 +179,27 @@ type ExampleHandler interface {
 }
 
 func RegisterExampleHandler(s server.Server, hdlr ExampleHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Example{hdlr}, opts...))
+	type example interface {
+		Call(ctx context.Context, in *Request, out *Response) error
+		Stream(ctx context.Context, stream server.Stream) error
+		PingPong(ctx context.Context, stream server.Stream) error
+	}
+	type Example struct {
+		example
+	}
+	h := &exampleHandler{hdlr}
+	s.Handle(s.NewHandler(&Example{h}, opts...))
 }
 
-type Example struct {
+type exampleHandler struct {
 	ExampleHandler
 }
 
-func (h *Example) Call(ctx context.Context, in *Request, out *Response) error {
+func (h *exampleHandler) Call(ctx context.Context, in *Request, out *Response) error {
 	return h.ExampleHandler.Call(ctx, in, out)
 }
 
-func (h *Example) Stream(ctx context.Context, stream server.Stream) error {
+func (h *exampleHandler) Stream(ctx context.Context, stream server.Stream) error {
 	m := new(StreamingRequest)
 	if err := stream.Recv(m); err != nil {
 		return err
@@ -225,7 +234,7 @@ func (x *exampleStreamStream) Send(m *StreamingResponse) error {
 	return x.stream.Send(m)
 }
 
-func (h *Example) PingPong(ctx context.Context, stream server.Stream) error {
+func (h *exampleHandler) PingPong(ctx context.Context, stream server.Stream) error {
 	return h.ExampleHandler.PingPong(ctx, &examplePingPongStream{stream})
 }
 

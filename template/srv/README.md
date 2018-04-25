@@ -1,30 +1,53 @@
-# Template Srv
+# Template Service
 
-This is the Template service with fqdn go.micro.srv.template.
+This is the Template service
+
+Generated with
+
+```
+micro new github.com/micro/examples/template/srv --namespace=go.micro --alias=template --type=srv
+```
 
 ## Getting Started
 
-### Prerequisites
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Usage](#usage)
 
-Install Consul
-[https://www.consul.io/intro/getting-started/install.html](https://www.consul.io/intro/getting-started/install.html)
+## Configuration
 
-Run Consul
+- FQDN: go.micro.srv.template
+- Type: srv
+- Alias: template
+
+## Dependencies
+
+Micro services depend on service discovery. The default is consul.
+
 ```
-$ consul agent -dev -advertise=127.0.0.1
+# install consul
+brew install consul
+
+# run consul
+consul agent -dev
 ```
 
-### Run Service
+## Usage
+
+A Makefile is included for convenience
+
+Build the binary
 
 ```
-$ go run main.go
+make build
 ```
 
-### Building a container
-
-If you would like to build the docker container do the following
+Run the service
 ```
-CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o template-srv ./main.go
-docker build -t template-srv .
+./template-srv
+```
 
+Build a docker image
+```
+make docker
 ```

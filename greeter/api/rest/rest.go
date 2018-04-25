@@ -50,7 +50,7 @@ func main() {
 	service.Init()
 
 	// setup Greeter Server Client
-	cl = hello.SayServiceClient("go.micro.srv.greeter", client.DefaultClient)
+	cl = hello.NewSayService("go.micro.srv.greeter", client.DefaultClient)
 
 	// Create RESTful handler
 	say := new(Say)
