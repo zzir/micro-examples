@@ -63,7 +63,7 @@ Path	|	Service	|	Method
 
 ### Proxy Mapping
 
-Starting the API with `--handler=proxy` will reverse proxy requests to backend services within the served API namespace (default: go.micro.api). 
+Starting the API with `--handler=http` will reverse proxy requests to backend services within the served API namespace (default: go.micro.api). 
 
 Example
 

@@ -7,7 +7,7 @@ This is an example of how to serve an API using gin
 ### Run the Micro API
 
 ```
-$ micro api --handler=proxy
+$ micro api --handler=http
 ```
 
 ### Run the Greeter Service

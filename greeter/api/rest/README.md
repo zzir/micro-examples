@@ -7,7 +7,7 @@ This is an example of how to serve REST behind the API using go-restful
 ### Run the Micro API
 
 ```
-$ micro api --handler=proxy
+$ micro api --handler=http
 ```
 
 ### Run the Greeter Service

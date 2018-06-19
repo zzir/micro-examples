@@ -24,7 +24,7 @@ func (m *mockGreeterService) Hello(ctx context.Context, req *proto.HelloRequest,
         }, nil
 }
 
-func GreeterServiceClient() proto.GreeterService {
+func NewGreeterService() proto.GreeterService {
         return new(mockGreeterService)
 }
 ```

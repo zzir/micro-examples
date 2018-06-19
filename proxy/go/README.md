@@ -29,7 +29,7 @@ go run rpc_client.go sidecar.go
 
 Run sidecar with proxy handler
 ```shell
-micro sidecar --handler=proxy
+micro sidecar --handler=http
 ```
 
 Run server

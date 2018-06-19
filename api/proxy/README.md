@@ -10,7 +10,7 @@ at the API layer. In this case we're using go-web to easily register http servic
 Run micro api with http proxy handler
 
 ```
-micro api --handler=proxy
+micro api --handler=http
 ```
 
 Run this proxy service
