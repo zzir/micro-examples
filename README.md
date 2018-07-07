@@ -9,6 +9,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [broker](broker) - A example of using Broker for Publish and Subscribing.
 - [client](client) - Usage of the Client package to call a service.
 - [command](command) - An example of bot commands as micro services
+- [config](config) - Using Go Config for dynamic config
 - [event](event) - Using the API Gateway event handler
 - [flags](flags) - Using command line flags with a service
 - [form](form) - How to parse a form behind the micro api
