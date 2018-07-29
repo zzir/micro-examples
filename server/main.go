@@ -28,7 +28,7 @@ func main() {
 	// Register Subscribers
 	if err := server.Subscribe(
 		server.NewSubscriber(
-			"topic.go.micro.srv.example",
+			"topic.example",
 			new(subscriber.Example),
 		),
 	); err != nil {
@@ -37,7 +37,7 @@ func main() {
 
 	if err := server.Subscribe(
 		server.NewSubscriber(
-			"topic.go.micro.srv.example",
+			"topic.example",
 			subscriber.Handler,
 		),
 	); err != nil {

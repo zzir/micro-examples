@@ -120,7 +120,7 @@ func main() {
 	service := micro.NewService()
 	service.Init()
 
-	p := micro.NewPublisher("example", service.Client())
+	p := micro.NewPublisher("topic.example", service.Client())
 
 	fmt.Println("\n--- Publisher example ---")
 	pub(p)
