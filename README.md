@@ -43,6 +43,7 @@ Find contributions from the community via the [explorer](https://micro.mu/explor
 
 - [go-shopping](https://github.com/autodidaddict/go-shopping) - A sample product with a suite of services
 - [shippy](https://github.com/EwanValentine/shippy) - A multi app demo and tutorial
+- [microhq](https://github.com/microhq) - A place for micro services
 
 ## Dependencies
 
