@@ -5,6 +5,8 @@ import (
 
 	proto "github.com/micro/examples/api/rpc/proto"
 	"github.com/micro/go-api"
+	rapi "github.com/micro/go-api/handler/api"
+	"github.com/micro/go-api/handler/rpc"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/errors"
 
@@ -55,7 +57,7 @@ func main() {
 		// The HTTP Methods for this endpoint
 		Method: []string{"POST"},
 		// The API handler to use
-		Handler: api.Rpc,
+		Handler: rpc.Handler,
 	}))
 
 	// register foo handler
@@ -67,7 +69,7 @@ func main() {
 		// The HTTP Methods for this endpoint
 		Method: []string{"POST"},
 		// The API handler to use
-		Handler: api.Rpc,
+		Handler: rapi.Handler,
 	}))
 
 	if err := service.Run(); err != nil {
