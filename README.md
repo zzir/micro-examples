@@ -14,6 +14,7 @@ This is a repository for micro examples. Feel free to contribute.
 - [flags](flags) - Using command line flags with a service
 - [form](form) - How to parse a form behind the micro api
 - [function](function) - Example of using Function programming model
+- [getip](getip) - Get the local and remote ip from metadata
 - [graceful](graceful) - Demonstrates graceful shutdown of a service
 - [greeter](greeter) - A complete greeter example (includes python, ruby examples)
 - [heartbeat](heartbeat) - Make services heartbeat with discovery for high availability
