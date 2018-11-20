@@ -53,7 +53,7 @@ go run api/api.go
 
 Run the micro API
 ```shell
-micro api
+micro api --handler=api
 ```
 
 Call go.micro.api.greeter via API
@@ -62,22 +62,6 @@ curl http://localhost:8080/greeter/say/hello?name=John
 ```
 
 Examples of other API handlers can be found in the API directory.
-
-## Sidecar
-
-The sidecar is a language agnostic RPC proxy.
-
-Run the micro sidecar
-```shell
-micro sidecar
-```
-
-Call go.micro.srv.greeter via sidecar
-```shell
-curl -H 'Content-Type: application/json' -d '{"name": "john"}' http://localhost:8081/greeter/say/hello
-```
-
-The sidecar provides all the features of go-micro as a HTTP API. Learn more at [micro/car](https://github.com/micro/micro/tree/master/car).
 
 ## Web
 

@@ -1,10 +1,10 @@
-# Default API
+# API
 
-This example makes use of the default micro API request handler.
+This example makes use of the "api" handler.
 
 The api expects you use the [api.Request/Response](https://github.com/micro/go-api/blob/master/proto/api.proto) protos.
 
-The default micro api request handler gives you full control over the http request and response while still leveraging RPC and 
+The micro api request handler gives you full control over the http request and response while still leveraging RPC and 
 any transport plugins that use other protocols beyond http in your stack such as grpc, nats, kafka.
 
 ## Usage
@@ -12,13 +12,13 @@ any transport plugins that use other protocols beyond http in your stack such as
 Run the micro API
 
 ```
-micro api
+micro api --handler=api
 ```
 
 Run this example
 
 ```
-go run default.go
+go run api.go
 ```
 
 Make a GET request to /example/call which will call go.micro.api.example Example.Call
