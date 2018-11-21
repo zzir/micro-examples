@@ -14,17 +14,17 @@ func (g *Greeter) Hello(ctx context.Context, name *string, msg *string) error {
 }
 
 func main() {
+	// create new service
 	service := micro.NewService(
 		micro.Name("greeter"),
 	)
+
+	// initialise command line
 	service.Init()
 
 	// set the handler
-	service.Server().Handle(
-		service.Server().NewHandler(
-			new(Greeter),
-		),
-	)
+	micro.RegisterHandler(service.Server(), new(Greeter))
 
+	// run service
 	service.Run()
 }
