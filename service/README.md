@@ -6,7 +6,6 @@ This is an example of creating a micro service.
 
 - main.go - is the main definition of the service, handler and client
 - proto - contains the protobuf definition of the API
-- wrapper - demonstrates the use of Client and Server Wrappers
 
 ## Prereqs
 
@@ -18,12 +17,10 @@ Install consul
 brew install consul
 ```
 
-Alternative instructions - [https://www.consul.io/intro/getting-started/install.html](https://www.consul.io/intro/getting-started/install.html)
-
 Run Consul
 
 ```shell
-consul agent -dev -advertise=127.0.0.1
+consul agent -dev
 ```
 
 ## Run the example
