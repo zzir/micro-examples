@@ -46,25 +46,25 @@ type GreeterService interface {
 }
 
 type greeterService struct {
-	c           client.Client
-	serviceName string
+	c    client.Client
+	name string
 }
 
-func NewGreeterService(serviceName string, c client.Client) GreeterService {
+func NewGreeterService(name string, c client.Client) GreeterService {
 	if c == nil {
 		c = client.NewClient()
 	}
-	if len(serviceName) == 0 {
-		serviceName = "greeter"
+	if len(name) == 0 {
+		name = "greeter"
 	}
 	return &greeterService{
-		c:           c,
-		serviceName: serviceName,
+		c:    c,
+		name: name,
 	}
 }
 
 func (c *greeterService) Hello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error) {
-	req := c.c.NewRequest(c.serviceName, "Greeter.Hello", in)
+	req := c.c.NewRequest(c.name, "Greeter.Hello", in)
 	out := new(HelloResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -79,15 +79,15 @@ type GreeterHandler interface {
 	Hello(context.Context, *HelloRequest, *HelloResponse) error
 }
 
-func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) {
-	type greeter interface {
+func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) error {
+	type _greeter interface {
 		Hello(ctx context.Context, in *HelloRequest, out *HelloResponse) error
 	}
 	type Greeter struct {
-		greeter
+		_greeter
 	}
 	h := &greeterHandler{hdlr}
-	s.Handle(s.NewHandler(&Greeter{h}, opts...))
+	return s.Handle(s.NewHandler(&Greeter{h}, opts...))
 }
 
 type greeterHandler struct {
