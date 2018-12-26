@@ -1,4 +1,4 @@
-require './sidecar'
+require './proxy'
 require 'securerandom'
 require 'webrick'
 

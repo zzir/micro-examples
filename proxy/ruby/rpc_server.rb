@@ -1,4 +1,4 @@
-require './sidecar'
+require './proxy'
 require 'rjr/nodes/web'
 
 $service = {

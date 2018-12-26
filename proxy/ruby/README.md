@@ -1,14 +1,14 @@
 # Ruby
 
-- sidecar.rb: methods to call sidecar
+- proxy.rb: methods to call proxy
 - rpc_{client,server}.rb: RPC client/server
 - http_{client,server}.rb: HTTP client/server
 
 ## RPC Example
 
-Run sidecar
+Run proxy
 ```shell
-micro sidecar
+micro proxy
 ```
 
 Run server
@@ -25,9 +25,9 @@ ruby rpc_client.rb
 
 ## HTTP Example
 
-Run sidecar with proxy handler
+Run proxy with proxy handler
 ```shell
-micro sidecar --handler=http
+micro proxy --handler=http
 ```
 
 Run server

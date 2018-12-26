@@ -1,9 +1,9 @@
 import requests
 import json
-import sidecar
+import proxy
 
 def main():
-    response = sidecar.rpc_call("/greeter/say/hello", {"name": "John"})
+    response = proxy.rpc_call("/greeter/say/hello", {"name": "John"})
     print response
 
 if __name__ == "__main__":

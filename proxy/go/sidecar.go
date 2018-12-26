@@ -12,7 +12,7 @@ import (
 
 var (
 	registryURI = "http://localhost:8081/registry"
-	sidecarURI  = "http://localhost:8081"
+	proxyURI  = "http://localhost:8081"
 )
 
 func register(s *registry.Service) {
@@ -29,7 +29,7 @@ func deregister(s *registry.Service) {
 
 func rpcCall(path string, req map[string]interface{}) (string, error) {
 	b, _ := json.Marshal(req)
-	rsp, err := http.Post(sidecarURI+path, "application/json", bytes.NewReader(b))
+	rsp, err := http.Post(proxyURI+path, "application/json", bytes.NewReader(b))
 	if err != nil {
 		return "", err
 	}
@@ -42,7 +42,7 @@ func rpcCall(path string, req map[string]interface{}) (string, error) {
 }
 
 func httpCall(path string, req url.Values) (string, error) {
-	rsp, err := http.PostForm(sidecarURI+path, req)
+	rsp, err := http.PostForm(proxyURI+path, req)
 	if err != nil {
 		return "", err
 	}

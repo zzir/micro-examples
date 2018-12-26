@@ -1,9 +1,9 @@
 import requests
 import json
-import sidecar
+import proxy
 
 def main():
-    response = sidecar.http_call("/greeter", {"name": "John"})
+    response = proxy.http_call("/greeter", {"name": "John"})
     print response.text
 
 if __name__ == "__main__":

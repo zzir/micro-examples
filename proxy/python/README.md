@@ -1,14 +1,14 @@
 # Python
 
-- sidecar.py: methods to call sidecar
+- proxy.py: methods to call proxy
 - rpc_{client,server}.py: RPC client/server
 - http_{client,server}.py: HTTP client/server
 
 ## RPC Example
 
-Run sidecar
+Run proxy
 ```shell
-micro sidecar
+micro proxy
 ```
 
 Run server
@@ -25,9 +25,9 @@ python rpc_client.py
 
 ## HTTP Example
 
-Run sidecar with proxy handler
+Run proxy with proxy handler
 ```shell
-micro sidecar --handler=http
+micro proxy --handler=http
 ```
 
 Run server

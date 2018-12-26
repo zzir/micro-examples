@@ -2,7 +2,7 @@ from flask import Flask, request
 from werkzeug.serving import run_simple
 
 import uuid
-import sidecar
+import proxy
 
 service = {
     "name": "go.micro.srv.greeter",
@@ -23,6 +23,6 @@ def hello_world():
     return 'Hello ' + name + '!'
 
 if __name__ == '__main__':
-    sidecar.register(service)
+    proxy.register(service)
     run_simple('localhost', 4000, app)
-    sidecar.deregister(service)
+    proxy.deregister(service)

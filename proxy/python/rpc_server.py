@@ -5,7 +5,7 @@ from jsonrpc import JSONRPCResponseManager, dispatcher
 
 import uuid
 import requests
-import sidecar
+import proxy
 
 service = {
     "name": "go.micro.srv.greeter",
@@ -23,6 +23,6 @@ def application(request):
     return Response(response.json, mimetype='application/json')
 
 if __name__ == '__main__':
-    sidecar.register(service)
+    proxy.register(service)
     run_simple('localhost', 4000, application)
-    sidecar.deregister(service)
+    proxy.deregister(service)

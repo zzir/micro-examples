@@ -20,7 +20,7 @@ brew install consul
 consul agent -dev
 ```
 
-Alternatively run sidecar with `--registry=mdns` or `MICRO_REGISTRY=mdns` for multicast dns and zero dependencies.
+Alternatively run proxy with `--registry=mdns` or `MICRO_REGISTRY=mdns` for multicast dns and zero dependencies.
 
 ### Run Proxy
 

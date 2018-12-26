@@ -1,45 +1,45 @@
 # Go
 
-This Go example uses vanilla net/http and the sidecar
+This Go example uses vanilla net/http and the proxy
 
-- sidecar.go: methods to call sidecar
+- proxy.go: methods to call proxy
 - rpc_{client,server}.go: RPC client/server
 - http_{client,server}.go: HTTP client/server
 
 ## RPC Example
 
-Run sidecar
+Run proxy
 ```shell
-micro sidecar
+micro proxy
 ```
 
 Run server
 ```shell
 # serves Say.Hello
-go run rpc_server.go sidecar.go
+go run rpc_server.go proxy.go
 ```
 
 Run client
 ```shell
 # calls go.micro.srv.greeter Say.Hello
-go run rpc_client.go sidecar.go
+go run rpc_client.go proxy.go
 ```
 
 ## HTTP Example
 
-Run sidecar with proxy handler
+Run proxy with proxy handler
 ```shell
-micro sidecar --handler=http
+micro proxy --handler=http
 ```
 
 Run server
 ```shell
 # serves /greeter
-go run http_server.go sidecar.go
+go run http_server.go proxy.go
 ```
 
 Run client
 ```shell
 # calls /greeter
-go run http_client.go sidecar.go
+go run http_client.go proxy.go
 ```
