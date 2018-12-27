@@ -16,7 +16,7 @@ micro api
 go run greeter/server/main.go
 ```
 
-### Run the Greeter API
+### Run Greeter API
 
 ```shell
 go run rpc.go
