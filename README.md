@@ -4,6 +4,14 @@ This is a repository for micro examples. Feel free to contribute.
 
 ## Contents
 
+Most likely needed examples
+
+- [service](service) - A sample micro service
+- [greeter](greeter) - A complete greeter example
+- [booking](booking) - A demo end to end application
+
+### Other
+
 - [api](api) - Provides API usage examples
 - [booking](booking) - A booking.com demo application
 - [broker](broker) - A example of using Broker for Publish and Subscribing.
