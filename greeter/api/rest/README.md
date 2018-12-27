@@ -1,41 +1,51 @@
-# Go Restful API Example
+# REST API
 
 This is an example of how to serve REST behind the API using go-restful
 
 ## Getting Started
 
-### Run the Micro API
+### Run Micro API
 
 ```
 $ micro api --handler=http
 ```
 
-### Run the Greeter Service
+### Run Greeter Service
 
-```
-$ go run greeter/server/main.go
-```
-
-### Run the Greeter API
-
-```
-$ go run go-restful.go
-Listening on [::]:64738
+```shell
+go run greeter/srv/main.go
 ```
 
-### Curl the API
+### Run Greeter API
+
+```shell
+go run rest.go
+```
+
+### Curl API
 
 Test the index
-```
+
+```shell
 curl http://localhost:8080/greeter
+```
+
+Output
+
+```json
 {
   "message": "Hi, this is the Greeter API"
 }
 ```
 
 Test a resource
-```
+
+```shell
  curl http://localhost:8080/greeter/asim
+```
+
+Output
+```json
 {
   "msg": "Hello asim"
 }
