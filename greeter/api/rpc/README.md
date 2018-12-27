@@ -13,7 +13,7 @@ micro api
 ### Run Greeter Service
 
 ```shell
-go run greeter/server/main.go
+go run greeter/srv/main.go
 ```
 
 ### Run Greeter API
