@@ -22,36 +22,6 @@ go run api.go
 ```
 
 
-## Usage with custom namespace
-
-Run the micro API
-
-```
-micro api --handler=api --namespace=com.myname.api
-```
-or
-```
-MICRO_API_NAMESPACE=com.myname.api micro api --handler=api
-```
-
-Change api.go file using custom namespace.
-```
-...
-service := micro.NewService(
-                micro.Name("com.myname.api.example"),
-        )
-...
-```        
-Now run the api.go file to register the service:
-```
-go run api.go
-```
-Verify that service has been registered. You should see:
-```
->consul catalog services
-consul
-com.myname.api.example
-```
 ## Calling the service
 
 Make a GET request to /example/call which will call go.micro.api.example Example.Call
@@ -66,4 +36,23 @@ Make a POST request to /example/foo/bar which will call go.micro.api.example Foo
 curl -H 'Content-Type: application/json' -d '{}' http://localhost:8080/example/foo/bar
 ```
 
+## Set Namespace
 
+Run the micro API with custom namespace
+
+```
+micro api --handler=api --namespace=com.foobar.api
+```
+
+or
+```
+MICRO_API_NAMESPACE=com.foobar.api micro api --handler=api
+```
+
+Set service name with the namespace
+
+```
+service := micro.NewService(
+        micro.Name("com.foobar.api.example"),
+)
+```   
