@@ -27,7 +27,7 @@ func sendEv(topic string, p micro.Publisher) {
 
 		// publish an event
 		if err := p.Publish(context.Background(), ev); err != nil {
-			log.Logf("error publishing %v", err)
+			log.Logf("error publishing: %v", err)
 		}
 	}
 }

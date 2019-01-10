@@ -20,7 +20,7 @@ type logWrapper struct {
 
 func (l *logWrapper) Call(ctx context.Context, req client.Request, rsp interface{}, opts ...client.CallOption) error {
 	md, _ := metadata.FromContext(ctx)
-	fmt.Printf("[Log Wrapper] ctx: %v service: %s method: %s\n", md, req.Service(), req.Method())
+	fmt.Printf("[Log Wrapper] ctx: %v service: %s method: %s\n", md, req.Service(), req.Endpoint())
 	return l.Client.Call(ctx, req, rsp)
 }
 
@@ -50,7 +50,7 @@ func metricsWrap(cf client.CallFunc) client.CallFunc {
 	return func(ctx context.Context, addr string, req client.Request, rsp interface{}, opts client.CallOptions) error {
 		t := time.Now()
 		err := cf(ctx, addr, req, rsp, opts)
-		fmt.Printf("[Metrics Wrapper] called: %s %s.%s duration: %v\n", addr, req.Service(), req.Method(), time.Since(t))
+		fmt.Printf("[Metrics Wrapper] called: %s %s.%s duration: %v\n", addr, req.Service(), req.Endpoint(), time.Since(t))
 		return err
 	}
 }

@@ -15,7 +15,7 @@ type logWrapper struct {
 }
 
 func (l *logWrapper) Call(ctx context.Context, req client.Request, rsp interface{}, opts ...client.CallOption) error {
-	fmt.Printf("[wrapper] client request service: %s method: %s\n", req.Service(), req.Method())
+	fmt.Printf("[wrapper] client request service: %s method: %s\n", req.Service(), req.Endpoint())
 	return l.Client.Call(ctx, req, rsp)
 }
 

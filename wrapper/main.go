@@ -20,7 +20,7 @@ func (g *Greeter) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto
 // logWrapper is a handler wrapper
 func logWrapper(fn server.HandlerFunc) server.HandlerFunc {
 	return func(ctx context.Context, req server.Request, rsp interface{}) error {
-		log.Printf("[wrapper] server request: %v", req.Method())
+		log.Printf("[wrapper] server request: %v", req.Endpoint())
 		err := fn(ctx, req, rsp)
 		return err
 	}
