@@ -19,22 +19,6 @@ can be set via the flag `--handler=`. The default handler is "rpc".
 - rpc - make an rpc request to a go-micro app
 - meta - specify which handler to use via configuration in code
 
-## Dependencies
-
-Service discovery is required for all services. Default is Consul or MDNS. You can also use plugins from 
-[micro/plugins](https://github.com/micro/go-plugins).
-
-### MDNS
-
-Use the flag `--registry=mdns`
-
-### Consul
-
-```
-brew install consul
-consul agent -dev
-```
-
 ## Request Mapping
 
 ### API/RPC

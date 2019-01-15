@@ -62,23 +62,21 @@ Find contributions from the community via the [explorer](https://micro.mu/explor
 
 ## Service Discovery
 
-All services require service discovery. The default is Consul or MDNS.
+All services require service discovery. The default is multicast DNS, a zeroconf system.
+
+If you need something multi-host or more resilient use consul.
 
 ### Consul
 
-Install
 ```
+# install
 brew install consul
-```
 
-Run
-```
+# run
 consul agent -dev
 ```
 
-### Multicast DNS
-
-Use flag `--registry=mdns` for a zero dependency configuration
+Use flag `--registry=consul` to enable the consul registry.
 
 ## Protobuf
 

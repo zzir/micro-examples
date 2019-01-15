@@ -8,22 +8,6 @@ A http request is formatted as an [event](https://github.com/micro/go-api/blob/m
 
 - srv - A service which subscribes to events
 
-## Deps
-
-Service discovery is required for all services. Default is Consul or MDNS. You can also use plugins from 
-[micro/plugins](https://github.com/micro/go-plugins).
-
-### MDNS
-
-Use the flag `--registry=mdns`
-
-### Consul
-
-```
-brew install consul
-consul agent -dev
-```
-
 ## Usage
 
 Run the micro api with the event handler set and with a namespace which used as part of the topic name

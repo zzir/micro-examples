@@ -13,16 +13,6 @@ An example Go service running with go-micro
 
 ## Usage
 
-### Prerequisites
-
-Install Consul
-[https://www.consul.io/intro/getting-started/install.html](https://www.consul.io/intro/getting-started/install.html)
-
-Run Consul
-```
-$ consul agent -dev -advertise=127.0.0.1
-```
-
 Run Service
 ```
 $ go run server/main.go

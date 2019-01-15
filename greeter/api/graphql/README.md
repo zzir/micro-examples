@@ -10,19 +10,13 @@ go get -u github.com/99designs/gqlgen github.com/vektah/gorunpkg
 
 ## Running the example
 
-### 1. Start Consul
-
-```
-consul agent --dev
-```
-
-### 2. Start the RPC server
+### 1. Start the RPC server
 
 ```
 go run srv/main.go
 ```
 
-### 3. Start the GraphQL server
+### 2. Start the GraphQL server
 
 ```
 go run api/graphql/main.go

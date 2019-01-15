@@ -11,18 +11,3 @@ to encode metadata into context which is passed through with messages.
 - srv - contains the service
 - cli - contains the client
 
-## Deps
-
-Service discovery is required for all services. Default is Consul or MDNS. You can also use plugins from 
-[micro/plugins](https://github.com/micro/go-plugins).
-
-### MDNS
-
-Use the flag `--registry=mdns`
-
-### Consul
-
-```
-brew install consul
-consul agent -dev
-```

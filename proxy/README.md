@@ -8,20 +8,6 @@ This directory contains examples for using the proxy with various languages.
 
 See details below
 
-### Run Discovery 
-
-Use Consul
-
-```
-# install
-brew install consul
-
-# run
-consul agent -dev
-```
-
-Alternatively run proxy with `--registry=mdns` or `MICRO_REGISTRY=mdns` for multicast dns and zero dependencies.
-
 ### Run Proxy
 
 ```

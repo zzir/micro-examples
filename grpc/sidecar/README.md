@@ -3,22 +3,6 @@
 The sidecar provides a HTTP api, uses dynamic routes, service discovery and load balancing. This and the micro api 
 are a powerful alternative to the grpc-gateway.
 
-## Deps
-
-Service discovery is required for all services. Default is Consul or MDNS. You can also use plugins from 
-[micro/plugins](https://github.com/micro/go-plugins).
-
-### MDNS
-
-Use the flag `--registry=mdns`
-
-### Consul
-
-```
-brew install consul
-consul agent -dev
-```
-
 ## Usage
 
 Check out the micro toolkit

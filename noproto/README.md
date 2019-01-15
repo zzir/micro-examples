@@ -11,18 +11,6 @@ json there is no code generation or use of protobuf required.
 - main.go - is a micro greeter service
 - client - is a micro json client
 
-## Prereqs
-
-Install and run consul
-
-```shell
-# install
-brew install consul
-
-# run
-consul agent -dev -advertise=127.0.0.1
-```
-
 ## Run the example
 
 Run the service

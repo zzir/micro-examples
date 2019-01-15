@@ -12,7 +12,7 @@ import (
 
 var (
 	registryURI = "http://localhost:8081/registry"
-	proxyURI  = "http://localhost:8081"
+	proxyURI    = "http://localhost:8081"
 )
 
 func register(s *registry.Service) {

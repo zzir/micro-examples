@@ -20,18 +20,6 @@ micro new github.com/micro/examples/template/fnc --namespace=go.micro --alias=te
 - Type: fnc
 - Alias: template
 
-## Dependencies
-
-Micro functions depend on service discovery. The default is consul.
-
-```
-# install consul
-brew install consul
-
-# run consul
-consul agent -dev
-```
-
 ## Usage
 
 A Makefile is included for convenience

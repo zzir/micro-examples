@@ -9,12 +9,6 @@ This rudimentary example demonstrates how to access a form and multipart form wh
 
 ## Usage
 
-Run discovery
-
-```
-consul agent -dev
-```
-
 Run the micro api
 
 ```

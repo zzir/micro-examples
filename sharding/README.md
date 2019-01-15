@@ -6,28 +6,6 @@ A sharding example using the greeter application and a X-From-User header as the
 
 - api.go - a modified version of the greeter api to include sharding
 
-## Deps
-
-Service discovery is required for all services. Default is Consul or MDNS. You can also use plugins from 
-[micro/plugins](https://github.com/micro/go-plugins).
-
-### MDNS
-
-Use the flag `--registry=mdns`
-
-### Consul
-
-```
-brew install consul
-consul agent -dev
-```
-
-### Micro
-
-```
-go get github.com/micro/micro
-```
-
 ## Run 
 
 ### Greeter Service

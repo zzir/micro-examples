@@ -7,22 +7,6 @@ This is an example of creating a micro service.
 - main.go - is the main definition of the service, handler and client
 - proto - contains the protobuf definition of the API
 
-## Prereqs
-
-Micro services need a discovery system so they can find each other. Micro uses consul by default but 
-its easily swapped out with etcd, kubernetes, or various other systems. We'll run consul for convenience.
-
-Install consul
-```shell
-brew install consul
-```
-
-Run Consul
-
-```shell
-consul agent -dev
-```
-
 ## Run the example
 
 Run the service

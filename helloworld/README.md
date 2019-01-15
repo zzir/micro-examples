@@ -11,7 +11,6 @@ This is hello world using micro
 
 Install the following
 
-- [consul](https://www.consul.io/intro/getting-started/install.html)
 - [micro](https://github.com/micro/micro)
 - [protoc-gen-micro](https://github.com/micro/protoc-gen-micro)
 
