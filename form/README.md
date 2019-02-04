@@ -12,7 +12,7 @@ This rudimentary example demonstrates how to access a form and multipart form wh
 Run the micro api
 
 ```
-micro api
+micro api --handler=api
 ```
 
 Run the micro web
