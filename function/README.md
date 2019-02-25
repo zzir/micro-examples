@@ -18,5 +18,5 @@ done
 ## Call function
 
 ```shell
-micro query greeter Greeter.Hello '{"name": "john"}'
+micro call greeter Greeter.Hello '{"name": "john"}'
 ```
