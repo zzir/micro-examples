@@ -73,6 +73,10 @@ func main() {
 
 	service.HandleFunc("/example/call", exampleCall)
 	service.HandleFunc("/example/foo/bar", exampleFooBar)
+	
+	if err := service.Init(); err != nil {
+		log.Fatal(err)
+	}
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
