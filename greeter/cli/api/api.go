@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	req, err := proto.Marshal(&api.Request{Post: map[string]*api.Pair{"name": {Key: "name", Values: []string{"John"}}}})
+	req, err := proto.Marshal(&api.Request{Get: map[string]*api.Pair{"name": {Key: "name", Values: []string{"John"}}}})
 	if err != nil {
 		fmt.Println(err)
 		return
