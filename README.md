@@ -2,6 +2,10 @@
 
 This is a repository for micro examples. Feel free to contribute.
 
+## i18n
+
+[中文版本](https://github.com/micro-in-cn/micro-all-in-one)
+
 ## Contents
 
 Most likely needed examples
@@ -101,7 +105,3 @@ go get github.com/micro/protoc-gen-micro
 ```shell
 protoc --proto_path=$GOPATH/src:. --micro_out=. --go_out=. path/to/proto
 ```
-
-## Chinese language version
-
-Our examples also has Chinese language version, see [Chinese](https://github.com/micro/examples/tree/cn-lang)
