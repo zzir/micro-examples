@@ -48,10 +48,10 @@ By registering with discovery using the sidecar, other services can find and que
 An example server can be found at examples/greeter/server/ruby/sidecar_server.rb
 An example client can be found at examples/greeter/client/ruby/sidecar_client.rb 
 
-### Run the sidecar
+### Run the proxy
 ```shell
 $ go get github.com/micro/micro
-$ micro sidecar
+$ micro proxy
 ```
 
 ### Register
