@@ -1,21 +1,21 @@
-package structs
+package config
 
-type Configs struct {
+type Config struct {
 	Micro *Micro `json:"micro,omitempty"`
-	Other *Other `json:"other,omitempty"`
+	Extra *Extra `json:"other,omitempty"`
 }
 
 type Micro struct {
-	Demo
+	Info
 }
 
-type Other struct {
-	Demo
+type Extra struct {
+	Info
 }
 
-type Demo struct {
+type Info struct {
 	Name    string `json:"name,omitempty"`
 	Version string `json:"version,omitempty"`
-	Hi      string `json:"hi,omitempty"`
+	Message string `json:"message,omitempty"`
 	Age     int    `json:"age,omitempty"`
 }

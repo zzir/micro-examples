@@ -4,27 +4,27 @@ import (
 	"context"
 	"crypto/md5"
 	"fmt"
-	"github.com/micro/go-config"
-	"github.com/micro/go-config/source/file"
-	proto "github.com/micro/go-config/source/grpc/proto"
-	"github.com/micro/go-log"
-	grpc2 "google.golang.org/grpc"
 	"net"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/micro/go-config"
+	"github.com/micro/go-config/source/file"
+	proto "github.com/micro/go-config/source/grpc/proto"
+	"github.com/micro/go-log"
+	grpc "google.golang.org/grpc"
 )
 
 var (
 	mux        sync.RWMutex
 	configMaps = make(map[string]*proto.ChangeSet)
-	apps       = []string{"micro", "other"}
+	apps       = []string{"micro", "extra"}
 )
 
 type Service struct{}
 
 func main() {
-
 	// load config files
 	err := loadConfigFile()
 	if err != nil {
@@ -32,7 +32,7 @@ func main() {
 	}
 
 	// new service
-	service := grpc2.NewServer()
+	service := grpc.NewServer()
 	proto.RegisterSourceServer(service, new(Service))
 	ts, err := net.Listen("tcp", ":8600")
 	if err != nil {
@@ -47,10 +47,9 @@ func main() {
 }
 
 func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.ReadResponse, err error) {
-
 	appName := parsePath(req.Path)
 	switch appName {
-	case "micro", "other":
+	case "micro", "extra":
 		rsp = &proto.ReadResponse{
 			ChangeSet: getConfig(appName),
 		}
@@ -64,7 +63,6 @@ func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.R
 }
 
 func (s Service) Watch(req *proto.WatchRequest, server proto.Source_WatchServer) (err error) {
-
 	appName := parsePath(req.Path)
 	rsp := &proto.WatchResponse{
 		ChangeSet: getConfig(appName),
@@ -78,7 +76,6 @@ func (s Service) Watch(req *proto.WatchRequest, server proto.Source_WatchServer)
 }
 
 func loadConfigFile() (err error) {
-
 	for _, app := range apps {
 		if err := config.Load(file.NewSource(
 			file.WithPath("./conf/" + app + ".yml"),
@@ -111,7 +108,6 @@ func loadConfigFile() (err error) {
 }
 
 func getConfig(appName string) *proto.ChangeSet {
-
 	bytes := config.Get(appName).Bytes()
 
 	log.Logf("[getConfig] appName，%s", string(bytes))
@@ -124,7 +120,6 @@ func getConfig(appName string) *proto.ChangeSet {
 }
 
 func parsePath(path string) (appName string) {
-
 	paths := strings.Split(path, "/")
 
 	if paths[0] == "" && len(paths) > 1 {

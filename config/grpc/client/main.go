@@ -1,39 +1,42 @@
 package main
 
 import (
-	"github.com/micro-in-cn/all-in-one/senior-practices/micro-config/gRPC/structs"
+	cnf "github.com/micro/examples/config/grpc/config"
 	"github.com/micro/go-config"
 	grpcConfig "github.com/micro/go-config/source/grpc"
 	"github.com/micro/go-log"
 )
 
 func main() {
-
+	// create new source
 	source := grpcConfig.NewSource(
 		grpcConfig.WithAddress("127.0.0.1:8600"),
 		grpcConfig.WithPath("/micro"),
 	)
 
+	// create new config
 	conf := config.NewConfig()
-	err := conf.Load(source)
-	if err != nil {
+
+	// load the source into config
+	if err := conf.Load(source); err != nil {
 		log.Fatal(err)
 	}
 
-	configs := &structs.Micro{}
-	err = conf.Scan(configs)
-	if err != nil {
+	// get the config
+	configs := &cnf.Micro{}
+	if err := conf.Scan(configs); err != nil {
 		log.Fatal(err)
 	}
 
-	log.Logf("Read configs: %s", string(conf.Bytes()))
+	log.Logf("Read config: %s", string(conf.Bytes()))
 
+	// watch the config for changes
 	watcher, err := conf.Watch()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Logf("Watch changes ...")
+	log.Logf("Watching for changes ...")
 
 	for {
 		v, err := watcher.Next()
@@ -41,6 +44,6 @@ func main() {
 			log.Fatal(err)
 		}
 
-		log.Logf("Watch changes: %v", string(v.Bytes()))
+		log.Logf("Watching for changes: %v", string(v.Bytes()))
 	}
 }

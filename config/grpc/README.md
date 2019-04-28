@@ -1,31 +1,30 @@
 # gRPC Config Server
 
+This is an example implementation of a grpc config server
+
 ## Get Started
 
-### config server
+### Run Server
 
 ```bash
-cd config-srv
-go run main.go
+go run srv/main.go
 ```
 
-### client
+### Run Client
 
 ```bash
 go run client/main.go
 ```
 
-### change files
+### Edit Config
 
-cd to config-srv/conf, change **micro.yml** file any values.
-
-eg.
+Change values in srv/conf/micro.yml
 
 ```bash
 micro:
   name: Micro
   version: 1.0.0
-  hi: hello
+  message: hello
 ```
 
 to 
@@ -34,11 +33,11 @@ to
 micro:
   name: Micro
   version: 1.0.0
-  hi: I am fine
+  message: hello john
 ```
 
-then the client prints:
+The output from watching config after an edit
 
 ```bash
-2019/04/28 10:57:15 Watch changes: {"hi":"I am fine","name":"Micro","version":"1.0.0"}
+2019/04/28 10:57:15 Watch changes: {"message":"hello john","name":"Micro","version":"1.0.0"}
 ``` 
