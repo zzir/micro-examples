@@ -1,11 +1,21 @@
 package main
 
 import (
-	cnf "github.com/micro/examples/config/grpc/config"
 	"github.com/micro/go-config"
 	grpcConfig "github.com/micro/go-config/source/grpc"
 	"github.com/micro/go-log"
 )
+
+type Micro struct {
+	Info
+}
+
+type Info struct {
+	Name    string `json:"name,omitempty"`
+	Version string `json:"version,omitempty"`
+	Message string `json:"message,omitempty"`
+	Age     int    `json:"age,omitempty"`
+}
 
 func main() {
 	// create new source
@@ -22,8 +32,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// get the config
-	configs := &cnf.Micro{}
+	configs := &Micro{}
 	if err := conf.Scan(configs); err != nil {
 		log.Fatal(err)
 	}
