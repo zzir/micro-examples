@@ -56,7 +56,7 @@ func (s Service) Read(ctx context.Context, req *proto.ReadRequest) (rsp *proto.R
 		}
 		return
 	default:
-		err = fmt.Errorf("[loadConfigFile] the first path is invalid")
+		err = fmt.Errorf("[Read] the first path is invalid")
 		return
 	}
 
