@@ -37,7 +37,7 @@ micro:
   hi: I am fine
 ```
 
-then the client print:
+then the client prints:
 
 ```bash
 2019/04/28 10:57:15 Watch changes: {"hi":"I am fine","name":"Micro","version":"1.0.0"}
