@@ -13,7 +13,7 @@ $ micro api --handler=http
 ### Run the Greeter Service
 
 ```
-$ go run greeter/server/main.go
+$ go run greeter/srv/main.go
 ```
 
 ### Run the Greeter API
