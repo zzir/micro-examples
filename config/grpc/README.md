@@ -5,7 +5,7 @@
 ### config server
 
 ```bash
-cd config-srv
+cd srv
 go run main.go
 ```
 
@@ -17,7 +17,7 @@ go run client/main.go
 
 ### change files
 
-cd to config-srv/conf, change **micro.yml** file any values.
+cd to srv/conf, change **micro.yml** file any values.
 
 eg.
 

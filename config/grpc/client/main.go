@@ -1,11 +1,21 @@
 package main
 
 import (
-	"github.com/micro-in-cn/all-in-one/senior-practices/micro-config/gRPC/structs"
 	"github.com/micro/go-config"
 	grpcConfig "github.com/micro/go-config/source/grpc"
 	"github.com/micro/go-log"
 )
+
+type Micro struct {
+	Demo
+}
+
+type Demo struct {
+	Name    string `json:"name,omitempty"`
+	Version string `json:"version,omitempty"`
+	Hi      string `json:"hi,omitempty"`
+	Age     int    `json:"age,omitempty"`
+}
 
 func main() {
 
@@ -20,7 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	configs := &structs.Micro{}
+	configs := &Micro{}
 	err = conf.Scan(configs)
 	if err != nil {
 		log.Fatal(err)
