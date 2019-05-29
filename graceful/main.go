@@ -11,7 +11,7 @@ func main() {
 	service := micro.NewService()
 
 	service.Server().Init(
-		server.Wait(true),
+		server.Wait(nil),
 	)
 
 	if err := service.Run(); err != nil {
