@@ -8,7 +8,7 @@ import (
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/errors"
-	api "github.com/micro/micro/api/proto"
+	api "github.com/micro/go-micro/api/proto"
 
 	"context"
 )
