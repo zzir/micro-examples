@@ -2,10 +2,10 @@ package main
 
 import (
 	"log"
-
+	"io"
 	"context"
-	"github.com/micro/go-micro"
 
+	"github.com/micro/go-micro"
 	proto "github.com/micro/examples/stream/server/proto"
 )
 
@@ -26,6 +26,9 @@ func (e *Streamer) ServerStream(ctx context.Context, req *proto.Request, stream 
 func (e *Streamer) Stream(ctx context.Context, stream proto.Streamer_StreamStream) error {
 	for {
 		req, err := stream.Recv()
+		if err == io.EOF {
+			return nil
+		}
 		if err != nil {
 			return err
 		}
