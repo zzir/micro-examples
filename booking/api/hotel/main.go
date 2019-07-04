@@ -1,18 +1,18 @@
 package main
 
 import (
+	"context"
 	"encoding/base64"
 	"errors"
 	_ "expvar"
+
 	"net/http"
 	_ "net/http/pprof"
 	"strings"
 
-	uuid "github.com/nu7hatch/gouuid"
-
-	"context"
 	"golang.org/x/net/trace"
 
+	"github.com/google/uuid"
 	"github.com/micro/examples/booking/api/hotel/proto"
 	"github.com/micro/examples/booking/srv/auth/proto"
 	"github.com/micro/examples/booking/srv/geo/proto"
@@ -57,17 +57,16 @@ func (s *Hotel) Rates(ctx context.Context, req *hotel.Request, rsp *hotel.Respon
 	}
 
 	// add a unique request id to context
-	if traceID, err := uuid.NewV4(); err == nil {
-		// make copy
-		tmd := metadata.Metadata{}
-		for k, v := range md {
-			tmd[k] = v
-		}
-
-		tmd["traceID"] = traceID.String()
-		tmd["fromName"] = "api.v1"
-		ctx = metadata.NewContext(ctx, tmd)
+	traceID := uuid.New()
+	// make copy
+	tmd := metadata.Metadata{}
+	for k, v := range md {
+		tmd[k] = v
 	}
+
+	tmd["traceID"] = traceID.String()
+	tmd["fromName"] = "api.v1"
+	ctx = metadata.NewContext(ctx, tmd)
 
 	// token from request headers
 	token, err := getToken(md)
