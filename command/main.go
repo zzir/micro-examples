@@ -7,7 +7,7 @@ import (
 	"context"
 	"github.com/micro/go-micro"
 
-	proto "github.com/micro/go-bot/proto"
+	proto "github.com/micro/go-micro/agent/proto"
 )
 
 type Command struct{}

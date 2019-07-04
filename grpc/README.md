@@ -1,18 +1,18 @@
 # GRPC
 
-Contains examples for using [go-grpc](https://github.com/micro/go-grpc)
+Contains examples for using [go-micro/service/grpc](https://github.com/micro/go-micro/service/grpc)
 
 - [greeter](greeter) - A greeter example
 - [gateway](gateway) - A grpc gateway example
 
 ## New service
 
-Check out the [greeter](greeter) example using go-grpc
+Check out the [greeter](greeter) example using go-micro/service/grpc
 
-### Import go-grpc
+### Import go-micro/service/grpc
 
 ```
-import "github.com/micro/go-grpc"
+import "github.com/micro/go-micro/service/grpc"
 ```
 
 ### Create micro.Service

@@ -333,7 +333,7 @@ See [linkerd2](https://linkerd.io/) for usage.
 
 ## Using Config Map
 
-[Go Config](https://github.com/micro/go-config) is a simple way to manage dynamic configuration. We've provided a pre-initialised version 
+[Go Config](https://github.com/micro/go-micro/config) is a simple way to manage dynamic configuration. We've provided a pre-initialised version 
 which reads from environment variables and the k8s config map.
 
 It uses the `default` namespace and expects a configmap with name `micro` to be present.

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"log"
-	"io"
 	"context"
+	"io"
+	"log"
 
-	"github.com/micro/go-micro"
 	proto "github.com/micro/examples/stream/server/proto"
+	"github.com/micro/go-micro"
 )
 
 type Streamer struct{}

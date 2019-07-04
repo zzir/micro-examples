@@ -3,7 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/util/log"
 
 	"github.com/micro/examples/template/api/client"
 	example "github.com/micro/examples/template/srv/proto/example"

@@ -18,10 +18,10 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.9.2
 	github.com/hailocab/go-geoindex v0.0.0-20160127134810-64631bfe9711
 	github.com/micro/cli v0.2.0
-	github.com/micro/go-bot v0.1.0
-	github.com/micro/go-config v0.13.3
-	github.com/micro/go-grpc v0.9.0
-	github.com/micro/go-log v0.1.0
+	github.com/micro/go-micro/agent v0.1.0
+	github.com/micro/go-micro/config v0.13.3
+	github.com/micro/go-micro/service/grpc v0.9.0
+	github.com/micro/go-micro/util/log v0.1.0
 	github.com/micro/go-micro v1.7.1-0.20190627135301-d8e998ad85fe
 	github.com/micro/go-plugins v1.1.1
 	github.com/micro/go-web v0.6.0

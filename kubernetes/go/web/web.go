@@ -1,8 +1,8 @@
 package web
 
 import (
-	"github.com/micro/go-grpc"
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/service/grpc"
 	"github.com/micro/go-micro/web"
 	"github.com/micro/go-plugins/registry/kubernetes"
 	// static selector offloads load balancing to k8s services

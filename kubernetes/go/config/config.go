@@ -2,9 +2,9 @@
 package config
 
 import (
-	"github.com/micro/go-config"
-	"github.com/micro/go-config/source/configmap"
-	"github.com/micro/go-config/source/env"
+	"github.com/micro/go-micro/config"
+	"github.com/micro/go-micro/config/source/env"
+	"github.com/micro/go-plugins/config/source/configmap"
 )
 
 // NewConfig returns config with env and k8s configmap setup

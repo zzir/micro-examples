@@ -39,7 +39,7 @@ Most likely needed examples
 - [options](options) - Setting options in the go-micro framework
 - [plugins](plugins) - How to use plugins
 - [pubsub](pubsub) - Example of using pubsub at the client/server level
-- [grpc](grpc) - Examples of how to use [go-grpc](https://github.com/micro/go-grpc)
+- [grpc](grpc) - Examples of how to use [go-micro/service/grpc](https://github.com/micro/go-micro/service/grpc)
 - [redirect](redirect) - An example of how to http redirect using an API service
 - [roundrobin](roundrobin) - A stateful client wrapper for true round robin of requests
 - [secure](secure) - Demonstrates use of transport secure option for self signed certs

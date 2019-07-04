@@ -2,10 +2,10 @@ package main
 
 import (
 	proto "github.com/micro/examples/pubsub/srv/proto"
-	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/metadata"
 	"github.com/micro/go-micro/server"
+	"github.com/micro/go-micro/util/log"
 
 	"context"
 )
