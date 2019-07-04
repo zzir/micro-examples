@@ -1,16 +1,15 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"strings"
 
 	proto "github.com/micro/examples/api/api/proto"
-	api "github.com/micro/go-api/proto"
 	"github.com/micro/go-micro"
+	api "github.com/micro/go-micro/api/proto"
 	"github.com/micro/go-micro/errors"
-
-	"context"
 )
 
 type Example struct{}

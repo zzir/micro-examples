@@ -4,10 +4,10 @@ import (
 	"log"
 
 	proto "github.com/micro/examples/api/rpc/proto"
-	"github.com/micro/go-api"
-	rapi "github.com/micro/go-api/handler/api"
-	"github.com/micro/go-api/handler/rpc"
 	"github.com/micro/go-micro"
+	"github.com/micro/go-micro/api"
+	rapi "github.com/micro/go-micro/api/handler/api"
+	"github.com/micro/go-micro/api/handler/rpc"
 	"github.com/micro/go-micro/errors"
 
 	"context"
