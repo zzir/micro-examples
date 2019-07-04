@@ -1,11 +1,11 @@
 package main
 
 import (
-	proto "github.com/micro/go-api/proto"
+	"context"
+
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
-
-	"context"
+	proto "github.com/micro/go-micro/api/proto"
 )
 
 // All methods of Event will be executed when a message is received

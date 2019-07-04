@@ -5,8 +5,8 @@ import (
 	"log"
 
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
+	k8s "github.com/micro/examples/kubernetes/go/micro"
 	"github.com/micro/go-micro"
-	k8s "github.com/micro/kubernetes/go/micro"
 )
 
 type Say struct{}

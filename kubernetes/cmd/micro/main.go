@@ -15,7 +15,7 @@ import (
 	// static selector offloads load balancing to k8s services
 	// enable with MICRO_SELECTOR=static or --selector=static
 	// requires user to create k8s services
-	_ "github.com/micro/go-plugins/selector/static"
+	_ "github.com/micro/go-plugins/client/selector/static"
 
 	// disable namespace by default
 	"github.com/micro/micro/api"

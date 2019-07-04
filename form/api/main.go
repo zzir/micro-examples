@@ -2,17 +2,16 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"mime"
 	"mime/multipart"
 	"strings"
 
 	proto "github.com/micro/examples/form/api/proto"
-	api "github.com/micro/go-api/proto"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
-
-	"context"
+	api "github.com/micro/go-micro/api/proto"
 )
 
 type Form struct{}

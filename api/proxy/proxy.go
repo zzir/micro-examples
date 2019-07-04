@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/micro/go-micro/errors"
-	"github.com/micro/go-web"
+	"github.com/micro/go-micro/web"
 )
 
 // exampleCall will handle /example/call
@@ -73,7 +73,7 @@ func main() {
 
 	service.HandleFunc("/example/call", exampleCall)
 	service.HandleFunc("/example/foo/bar", exampleFooBar)
-	
+
 	if err := service.Init(); err != nil {
 		log.Fatal(err)
 	}

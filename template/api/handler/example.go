@@ -7,7 +7,7 @@ import (
 
 	"github.com/micro/examples/template/api/client"
 	example "github.com/micro/examples/template/srv/proto/example"
-	api "github.com/micro/go-api/proto"
+	api "github.com/micro/go-micro/api/proto"
 	"github.com/micro/go-micro/errors"
 )
 

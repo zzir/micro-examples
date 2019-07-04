@@ -234,10 +234,10 @@ spec:
 ## Load Balancing
 
 Micro includes client side load balancing by default but kubernetes also provides Service load balancing strategies. 
-In **micro on kubernetes** we offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) and k8s services.
+In **micro on kubernetes** we offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/client/selector/static) and k8s services.
 
 Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080. 
-Read about the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static).
+Read about the [static selector](https://github.com/micro/go-plugins/tree/master/client/selector/static).
 
 This approach handles both initial connection load balancing and health checks since Kubernetes services stop routing traffic to unhealthy services, but if you want to use long lived connections such as the ones in gRPC protocol, a service-mesh like [Conduit](https://conduit.io/), [Istio](https://istio.io) and [Linkerd](https://linkerd.io/) should be prefered to handle service discovery, routing and failure. 
 
