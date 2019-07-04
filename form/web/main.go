@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/micro/go-web"
+	"github.com/micro/go-micro/web"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
