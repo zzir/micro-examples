@@ -5,7 +5,7 @@ import (
 
 	"context"
 	example "github.com/micro/examples/server/proto/example"
-	"github.com/micro/go-micro/cmd"
+	"github.com/micro/go-micro/config/cmd"
 )
 
 var (
