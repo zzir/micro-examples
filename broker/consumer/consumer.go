@@ -16,7 +16,7 @@ var (
 
 // Example of a shared subscription which receives a subset of messages
 func sharedSub() {
-	_, err := broker.Subscribe(topic, func(p broker.Publication) error {
+	_, err := broker.Subscribe(topic, func(p broker.Event) error {
 		fmt.Println("[sub] received message:", string(p.Message().Body), "header", p.Message().Header)
 		return nil
 	}, broker.Queue("consumer"))
@@ -27,7 +27,7 @@ func sharedSub() {
 
 // Example of a subscription which receives all the messages
 func sub() {
-	_, err := broker.Subscribe(topic, func(p broker.Publication) error {
+	_, err := broker.Subscribe(topic, func(p broker.Event) error {
 		fmt.Println("[sub] received message:", string(p.Message().Body), "header", p.Message().Header)
 		return nil
 	})
