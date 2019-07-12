@@ -131,13 +131,13 @@ kubectl create -f greeter-svc.yaml
 
 ## Writing a Web Service
 
-Write a web service as you would any other [go-web](https://github.com/micro/go-web) service.
+Write a web service as you would any other [go-micro/web](https://github.com/micro/go-micro/web) service.
 
 ```go
 import (
 	"net/http"
 
-	"github.com/micro/go-web"
+	"github.com/micro/go-micro/web"
 	k8s "github.com/micro/kubernetes/go/web"
 )
 
